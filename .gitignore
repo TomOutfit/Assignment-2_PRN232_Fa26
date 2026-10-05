@@ -34,6 +34,7 @@ Thumbs.db
 
 # Documents, Database Scripts & Duplicate Solution Files
 *.doc
+*.docx
 *.sql
 !TaskManagementDB_assignment2.sql
 !TaskManagementDB_assignment1.sql
