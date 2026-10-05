@@ -10,7 +10,13 @@ import {
   ArrowRight,
   TrendingUp,
   Calendar,
+  Shield,
+  ShieldCheck,
+  UserCheck,
+  LogIn,
+  Sparkles,
 } from 'lucide-react';
+import { useAuth } from '../context/AuthContext';
 import { taskApi, projectApi, departmentApi } from '../services/api';
 import type { Task, Project, Department } from '../types';
 import { StatCard } from '../components/ui/StatCard';
@@ -19,6 +25,7 @@ import { Skeleton } from '../components/ui/Skeleton';
 import './Dashboard.css';
 
 export default function Dashboard() {
+  const { user, isAuthenticated, isAdmin } = useAuth();
   const [tasks, setTasks] = useState<Task[]>([]);
   const [projects, setProjects] = useState<Project[]>([]);
   const [departments, setDepartments] = useState<Department[]>([]);
@@ -84,22 +91,182 @@ export default function Dashboard() {
 
   return (
     <div className="dashboard-page">
+      {/* Assignment 2 Architecture & Access Guide Banner */}
+      {!isAuthenticated ? (
+        <div
+          className="glass-card ass2-feature-banner"
+          style={{
+            padding: '22px 26px',
+            borderRadius: 16,
+            background: 'linear-gradient(135deg, rgba(37, 99, 235, 0.08), rgba(99, 102, 241, 0.05))',
+            border: '1px solid rgba(59, 130, 246, 0.25)',
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            flexWrap: 'wrap',
+            gap: 18,
+            marginBottom: 20,
+          }}
+        >
+          <div style={{ maxWidth: 680 }}>
+            <div
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: 6,
+                padding: '3px 10px',
+                borderRadius: 9999,
+                background: 'rgba(37, 99, 235, 0.12)',
+                color: '#2563eb',
+                fontSize: 12,
+                fontWeight: 700,
+                marginBottom: 8,
+              }}
+            >
+              <Sparkles size={14} /> PRN232 Assignment 2 • Role-Based Authentication
+            </div>
+            <h2 style={{ fontSize: '1.25rem', fontWeight: 800, margin: '0 0 6px 0', color: 'var(--text-primary)' }}>
+              Dual-Tier Operational Architecture
+            </h2>
+            <p style={{ color: 'var(--text-secondary)', fontSize: '0.875rem', lineHeight: 1.55, margin: 0 }}>
+              Public visitors can freely browse departments, projects, and tasks in <strong>Read-Only Mode</strong>. To create, edit, or delete items, please sign in with an authenticated <strong>Staff</strong> or <strong>Admin</strong> account.
+            </p>
+          </div>
+
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
+            <Link
+              to="/login"
+              className="btn btn-primary"
+              style={{
+                padding: '10px 18px',
+                fontSize: '0.875rem',
+                fontWeight: 600,
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: 8,
+                boxShadow: '0 4px 14px rgba(37, 99, 235, 0.25)',
+              }}
+            >
+              <LogIn size={16} /> Sign In to Admin Hub
+            </Link>
+            <Link
+              to="/register"
+              className="btn btn-secondary"
+              style={{
+                padding: '10px 16px',
+                fontSize: '0.875rem',
+                fontWeight: 600,
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: 8,
+              }}
+            >
+              <UserCheck size={16} /> Register Staff
+            </Link>
+          </div>
+        </div>
+      ) : (
+        <div
+          className="glass-card ass2-feature-banner"
+          style={{
+            padding: '20px 24px',
+            borderRadius: 16,
+            background: isAdmin
+              ? 'linear-gradient(135deg, rgba(239, 68, 68, 0.08), rgba(249, 115, 22, 0.05))'
+              : 'linear-gradient(135deg, rgba(37, 99, 235, 0.08), rgba(16, 185, 129, 0.05))',
+            border: `1px solid ${isAdmin ? 'rgba(239, 68, 68, 0.25)' : 'rgba(37, 99, 235, 0.25)'}`,
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            flexWrap: 'wrap',
+            gap: 16,
+            marginBottom: 20,
+          }}
+        >
+          <div>
+            <div
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: 6,
+                padding: '3px 10px',
+                borderRadius: 9999,
+                background: isAdmin ? 'rgba(239, 68, 68, 0.12)' : 'rgba(37, 99, 235, 0.12)',
+                color: isAdmin ? '#ef4444' : '#2563eb',
+                fontSize: 12,
+                fontWeight: 700,
+                marginBottom: 6,
+              }}
+            >
+              {isAdmin ? <ShieldCheck size={14} /> : <UserCheck size={14} />} Authenticated as {user?.roleName}
+            </div>
+            <h3 style={{ fontSize: '1.125rem', fontWeight: 800, margin: '0 0 4px 0', color: 'var(--text-primary)' }}>
+              Welcome back, {user?.fullName}!
+            </h3>
+            <p style={{ color: 'var(--text-secondary)', fontSize: '0.875rem', margin: 0 }}>
+              {isAdmin
+                ? 'You have full administrative privileges including Account Management.'
+                : 'You have write permissions to create, update, and delete projects, tasks, and departments.'}
+            </p>
+          </div>
+
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+            <Link
+              to="/admin"
+              className="btn btn-primary"
+              style={{
+                padding: '9px 16px',
+                fontSize: '0.875rem',
+                fontWeight: 600,
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: 8,
+                background: isAdmin ? '#ef4444' : '#2563eb',
+              }}
+            >
+              <Shield size={16} /> Enter Admin Hub
+            </Link>
+            <Link
+              to="/admin/tasks"
+              className="btn btn-secondary"
+              style={{
+                padding: '9px 14px',
+                fontSize: '0.875rem',
+                fontWeight: 600,
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: 6,
+              }}
+            >
+              <CheckSquare size={16} /> Task Manager
+            </Link>
+          </div>
+        </div>
+      )}
+
       {/* Welcome & Quick Action Bar */}
       <div className="dashboard-header-banner">
         <div>
-          <h2 className="banner-title">Welcome back to TaskTrack</h2>
+          <h2 className="banner-title">Operational Overview</h2>
           <p className="banner-subtitle">
-            Here is an overview of your organization's workload, projects, and execution health.
+            Live metric tracking across projects, work items, and organizational departments.
           </p>
         </div>
         <div className="banner-actions">
-          <Link to="/tasks" className="btn btn-primary">
-            <Plus size={16} />
-            <span>Manage Tasks</span>
-          </Link>
+          {isAuthenticated ? (
+            <Link to="/admin/tasks" className="btn btn-primary">
+              <Plus size={16} />
+              <span>Manage Tasks</span>
+            </Link>
+          ) : (
+            <Link to="/tasks" className="btn btn-primary">
+              <CheckSquare size={16} />
+              <span>Browse Tasks</span>
+            </Link>
+          )}
           <Link to="/projects" className="btn btn-secondary">
             <FolderKanban size={16} />
-            <span>View Projects</span>
+            <span>Explore Projects</span>
           </Link>
         </div>
       </div>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import {
   Plus,
   Search,
@@ -18,7 +18,12 @@ import {
   Paperclip,
   ChevronDown,
   Check,
+  Shield,
+  Eye,
+  ArrowRight,
+  LogIn,
 } from 'lucide-react';
+import { useAuth } from '../context/AuthContext';
 import { taskApi, projectApi, departmentApi, tagApi } from '../services/api';
 import type { Task, CreateTaskDto, UpdateTaskDto, Project, Department, Tag } from '../types';
 import { Modal } from '../components/ui/Modal';
@@ -46,6 +51,10 @@ const PRIORITY_OPTIONS = [
 
 export default function TaskList() {
   const toast = useToast();
+  const location = useLocation();
+  const { isAuthenticated } = useAuth();
+  const isAdminRoute = location.pathname.startsWith('/admin');
+
   const [tasks, setTasks] = useState<Task[]>([]);
   const [departments, setDepartments] = useState<Department[]>([]);
   const [projects, setProjects] = useState<Project[]>([]);
@@ -307,11 +316,73 @@ export default function TaskList() {
   });
 
   return (
-    <div className="tasks-board-page">
+    <div className="tasks-board-page animate-fade-in">
+      {/* ==================== BREADCRUMB & DUAL-TIER SWITCHER ==================== */}
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12, marginBottom: 16 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 13, color: 'var(--text-secondary)' }}>
+          {isAdminRoute ? (
+            <>
+              <Link to="/admin" style={{ color: 'var(--primary)', textDecoration: 'none', fontWeight: 600 }}>Admin Hub</Link>
+              <span>/</span>
+              <span style={{ fontWeight: 600, color: 'var(--text-primary)' }}>Task Management</span>
+              <span style={{ fontSize: 11, fontWeight: 700, padding: '2px 8px', borderRadius: 9999, background: 'rgba(37, 99, 235, 0.12)', color: '#2563eb', marginLeft: 4 }}>
+                🔒 PROTECTED WORKSPACE
+              </span>
+            </>
+          ) : (
+            <>
+              <Link to="/" style={{ color: 'var(--primary)', textDecoration: 'none', fontWeight: 600 }}>Home</Link>
+              <span>/</span>
+              <span style={{ fontWeight: 600, color: 'var(--text-primary)' }}>Tasks Explorer</span>
+              <span style={{ fontSize: 11, fontWeight: 700, padding: '2px 8px', borderRadius: 9999, background: 'rgba(100, 116, 139, 0.12)', color: 'var(--text-secondary)', marginLeft: 4 }}>
+                👀 PUBLIC READ-ONLY
+              </span>
+            </>
+          )}
+        </div>
+
+        {/* View Switcher between Public and Admin */}
+        <div className="view-toggle-container">
+          <Link to="/tasks" className={`view-toggle-btn ${!isAdminRoute ? 'active' : ''}`}>
+            <Eye size={14} />
+            <span>Public Explorer</span>
+          </Link>
+          <Link to="/admin/tasks" className={`view-toggle-btn ${isAdminRoute ? 'active' : ''}`}>
+            <Shield size={14} />
+            <span>Manage Tasks {!isAuthenticated && '🔒'}</span>
+          </Link>
+        </div>
+      </div>
+
+      {/* Public Read-Only Notification Banner */}
+      {!isAdminRoute && !isAuthenticated && (
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          flexWrap: 'wrap',
+          gap: 12,
+          padding: '12px 18px',
+          borderRadius: 12,
+          background: 'rgba(37, 99, 235, 0.08)',
+          border: '1px solid rgba(37, 99, 235, 0.2)',
+          marginBottom: 16,
+          fontSize: '0.875rem'
+        }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8, color: 'var(--text-secondary)' }}>
+            <Eye size={16} color="#2563eb" />
+            <span>You are viewing tasks in <strong>Public Read-Only Mode</strong>. Sign in as Staff or Admin to create, update, reassign, or delete work items.</span>
+          </div>
+          <Link to="/login?redirect=/admin/tasks" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontWeight: 700, color: '#2563eb', textDecoration: 'none' }}>
+            <span>Sign In to Unlock Management</span> <ArrowRight size={14} />
+          </Link>
+        </div>
+      )}
+
       {/* ==================== PAGE HEADER & ACTION CONTROLS ==================== */}
       <div className="board-top-section">
         <div className="board-title-group">
-          <h1 className="board-main-title">My Tasks</h1>
+          <h1 className="board-main-title">{isAdminRoute ? 'Task Management Workspace' : 'Task Explorer'}</h1>
           
           {/* Dynamic Filter Dropdown Pills from Real Database */}
           <div className="filter-pills-bar">
@@ -458,10 +529,22 @@ export default function TaskList() {
             </button>
           </div>
 
-          <button className="btn-create-task" onClick={() => openTaskModal()}>
-            <Plus size={16} strokeWidth={2.5} />
-            <span>New Task</span>
-          </button>
+          {isAdminRoute || isAuthenticated ? (
+            <button className="btn-create-task" onClick={() => openTaskModal()}>
+              <Plus size={16} strokeWidth={2.5} />
+              <span>New Task</span>
+            </button>
+          ) : (
+            <Link
+              to="/login?redirect=/admin/tasks"
+              className="btn-create-task"
+              style={{ background: '#2563EB', textDecoration: 'none' }}
+              title="Sign in to create tasks"
+            >
+              <LogIn size={15} />
+              <span>Sign In to Create</span>
+            </Link>
+          )}
         </div>
       </div>
 

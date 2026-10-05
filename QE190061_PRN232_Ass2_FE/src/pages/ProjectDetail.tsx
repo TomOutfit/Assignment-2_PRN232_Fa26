@@ -12,6 +12,7 @@ import {
   Home,
   CheckSquare,
   Tag as TagIcon,
+  Lock,
 } from 'lucide-react';
 import { projectApi, taskApi, tagApi, departmentApi } from '../services/api';
 import type { Project, CreateTaskDto, UpdateProjectDto, Tag, Department } from '../types';
@@ -20,6 +21,7 @@ import { Modal } from '../components/ui/Modal';
 import { Skeleton } from '../components/ui/Skeleton';
 import { EmptyState } from '../components/ui/EmptyState';
 import { useToast } from '../context/ToastContext';
+import { useAuth } from '../context/AuthContext';
 import './DetailPages.css';
 
 const PROJECT_STATUS_OPTIONS = [
@@ -47,6 +49,7 @@ const PRIORITY_OPTIONS = [
 export default function ProjectDetail() {
   const { id } = useParams<{ id: string }>();
   const toast = useToast();
+  const { isAuthenticated } = useAuth();
   const [project, setProject] = useState<Project | null>(null);
   const [departments, setDepartments] = useState<Department[]>([]);
   const [tags, setTags] = useState<Tag[]>([]);
@@ -260,28 +263,37 @@ export default function ProjectDetail() {
           </div>
 
           <div style={{ display: 'flex', gap: '10px' }}>
-            <button className="btn btn-secondary btn-sm" onClick={() => setShowEditProjModal(true)}>
-              <Edit2 size={14} />
-              <span>Edit Project</span>
-            </button>
-            <button
-              className="btn btn-primary btn-sm"
-              onClick={() => {
-                setTaskForm({
-                  title: '',
-                  description: '',
-                  status: 0,
-                  priority: 1,
-                  dueDate: undefined,
-                  projectId: project.projectId,
-                  tagIds: [],
-                });
-                setShowAddTaskModal(true);
-              }}
-            >
-              <Plus size={14} />
-              <span>Add Task</span>
-            </button>
+            {isAuthenticated ? (
+              <>
+                <button className="btn btn-secondary btn-sm" onClick={() => setShowEditProjModal(true)}>
+                  <Edit2 size={14} />
+                  <span>Edit Project</span>
+                </button>
+                <button
+                  className="btn btn-primary btn-sm"
+                  onClick={() => {
+                    setTaskForm({
+                      title: '',
+                      description: '',
+                      status: 0,
+                      priority: 1,
+                      dueDate: undefined,
+                      projectId: project.projectId,
+                      tagIds: [],
+                    });
+                    setShowAddTaskModal(true);
+                  }}
+                >
+                  <Plus size={14} />
+                  <span>Add Task</span>
+                </button>
+              </>
+            ) : (
+              <Link to={`/login?redirect=/projects/${project.projectId}`} className="btn btn-secondary btn-sm" title="Sign in with Staff or Admin account to edit">
+                <Lock size={14} />
+                <span>Sign In to Edit</span>
+              </Link>
+            )}
           </div>
         </div>
       </div>

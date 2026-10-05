@@ -50,9 +50,9 @@ export default function PublicDepartments() {
               <Building2 size={15} />
               <span>Overview Cards</span>
             </Link>
-            <Link to="/departments/manage" className="view-toggle-btn">
+            <Link to="/admin/departments" className="view-toggle-btn">
               <Settings size={15} />
-              <span>Manage Table</span>
+              <span>Manage Table 🔒</span>
             </Link>
           </div>
         </div>

@@ -10,6 +10,7 @@ import {
   Edit2,
   ChevronRight,
   Home,
+  Lock,
 } from 'lucide-react';
 import { departmentApi, projectApi } from '../services/api';
 import type { Department, CreateProjectDto, UpdateDepartmentDto } from '../types';
@@ -18,11 +19,13 @@ import { Modal } from '../components/ui/Modal';
 import { Skeleton } from '../components/ui/Skeleton';
 import { EmptyState } from '../components/ui/EmptyState';
 import { useToast } from '../context/ToastContext';
+import { useAuth } from '../context/AuthContext';
 import './DetailPages.css';
 
 export default function DepartmentDetail() {
   const { id } = useParams<{ id: string }>();
   const toast = useToast();
+  const { isAuthenticated } = useAuth();
   const [dept, setDept] = useState<Department | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -171,27 +174,36 @@ export default function DepartmentDetail() {
           </div>
 
           <div style={{ display: 'flex', gap: '10px' }}>
-            <button className="btn btn-secondary btn-sm" onClick={() => setShowEditDeptModal(true)}>
-              <Edit2 size={14} />
-              <span>Edit Department</span>
-            </button>
-            <button
-              className="btn btn-primary btn-sm"
-              onClick={() => {
-                setProjForm({
-                  projectName: '',
-                  description: '',
-                  startDate: new Date().toISOString().split('T')[0],
-                  endDate: undefined,
-                  status: 0,
-                  departmentId: dept.departmentId,
-                });
-                setShowAddProjModal(true);
-              }}
-            >
-              <Plus size={14} />
-              <span>Add Project</span>
-            </button>
+            {isAuthenticated ? (
+              <>
+                <button className="btn btn-secondary btn-sm" onClick={() => setShowEditDeptModal(true)}>
+                  <Edit2 size={14} />
+                  <span>Edit Department</span>
+                </button>
+                <button
+                  className="btn btn-primary btn-sm"
+                  onClick={() => {
+                    setProjForm({
+                      projectName: '',
+                      description: '',
+                      startDate: new Date().toISOString().split('T')[0],
+                      endDate: undefined,
+                      status: 0,
+                      departmentId: dept.departmentId,
+                    });
+                    setShowAddProjModal(true);
+                  }}
+                >
+                  <Plus size={14} />
+                  <span>Add Project</span>
+                </button>
+              </>
+            ) : (
+              <Link to={`/login?redirect=/departments/${dept.departmentId}`} className="btn btn-secondary btn-sm" title="Sign in with Staff or Admin account to edit">
+                <Lock size={14} />
+                <span>Sign In to Edit</span>
+              </Link>
+            )}
           </div>
         </div>
       </div>

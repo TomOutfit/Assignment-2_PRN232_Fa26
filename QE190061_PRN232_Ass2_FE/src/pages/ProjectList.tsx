@@ -11,6 +11,9 @@ import {
   LayoutGrid,
   Table as TableIcon,
   ChevronDown,
+  FolderKanban,
+  ChevronRight,
+  Lock,
 } from 'lucide-react';
 import { projectApi, departmentApi } from '../services/api';
 import type { Project, CreateProjectDto, UpdateProjectDto, Department } from '../types';
@@ -20,6 +23,7 @@ import { EmptyState } from '../components/ui/EmptyState';
 import { Skeleton } from '../components/ui/Skeleton';
 import { useToast } from '../context/ToastContext';
 import './ProjectList.css';
+import './DetailPages.css';
 
 const PROJECT_STATUS_OPTIONS = [
   { value: 0, label: 'Planning', color: '#64748b', bg: '#f1f5f9' },
@@ -181,10 +185,49 @@ export default function ProjectList() {
 
   return (
     <div className="projects-page-container">
+      {/* ==================== BREADCRUMBS & MODE INDICATOR ==================== */}
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px', flexWrap: 'wrap', gap: '8px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '13px', color: 'var(--text-secondary)' }}>
+          <Link to="/admin" style={{ color: 'var(--accent-primary)', textDecoration: 'none', fontWeight: 600 }}>
+            Admin Hub
+          </Link>
+          <ChevronRight size={14} />
+          <span style={{ fontWeight: 600, color: 'var(--text-primary)' }}>Project Management</span>
+        </div>
+
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <div className="view-toggle-container">
+            <Link to="/projects" className="view-toggle-btn">
+              <FolderKanban size={14} />
+              <span>Public Cards</span>
+            </Link>
+            <div className="view-toggle-btn active">
+              <TableIcon size={14} />
+              <span>Manage Table</span>
+            </div>
+          </div>
+          <span
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '5px',
+              padding: '4px 10px',
+              borderRadius: '9999px',
+              background: 'rgba(16, 185, 129, 0.1)',
+              color: '#10b981',
+              fontSize: '11px',
+              fontWeight: 700,
+            }}
+          >
+            <Lock size={12} /> Staff / Admin Mode
+          </span>
+        </div>
+      </div>
+
       {/* ==================== TOP BAR ==================== */}
       <div className="page-header-bar">
         <div>
-          <h1 className="page-main-title">Projects</h1>
+          <h1 className="page-main-title">Project Management</h1>
           <p className="page-sub-title">
             Oversee strategic initiatives, deliverables, timelines, and departmental ownership.
           </p>

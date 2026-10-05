@@ -9,6 +9,7 @@ import {
   ChevronRight,
   Home,
   Tag as TagIcon,
+  Lock,
 } from 'lucide-react';
 import { taskApi, projectApi, tagApi } from '../services/api';
 import type { Task, UpdateTaskDto, Project, Tag } from '../types';
@@ -18,6 +19,7 @@ import { ConfirmModal } from '../components/ui/ConfirmModal';
 import { Skeleton } from '../components/ui/Skeleton';
 import { EmptyState } from '../components/ui/EmptyState';
 import { useToast } from '../context/ToastContext';
+import { useAuth } from '../context/AuthContext';
 import './DetailPages.css';
 
 const STATUS_OPTIONS = [
@@ -38,6 +40,7 @@ export default function TaskDetail() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const toast = useToast();
+  const { isAuthenticated } = useAuth();
 
   const [task, setTask] = useState<Task | null>(null);
   const [projects, setProjects] = useState<Project[]>([]);
@@ -256,14 +259,23 @@ export default function TaskDetail() {
 
         <div className="task-detail-footer">
           <div style={{ display: 'flex', gap: '10px' }}>
-            <button className="btn btn-danger btn-sm" onClick={() => setShowDeleteModal(true)}>
-              <Trash2 size={14} />
-              <span>Delete Task</span>
-            </button>
-            <button className="btn btn-primary btn-sm" onClick={() => setShowEditModal(true)}>
-              <Edit2 size={14} />
-              <span>Edit Task</span>
-            </button>
+            {isAuthenticated ? (
+              <>
+                <button className="btn btn-danger btn-sm" onClick={() => setShowDeleteModal(true)}>
+                  <Trash2 size={14} />
+                  <span>Delete Task</span>
+                </button>
+                <button className="btn btn-primary btn-sm" onClick={() => setShowEditModal(true)}>
+                  <Edit2 size={14} />
+                  <span>Edit Task</span>
+                </button>
+              </>
+            ) : (
+              <Link to={`/login?redirect=/tasks/${task.taskId}`} className="btn btn-secondary btn-sm" title="Sign in with Staff or Admin account to edit or delete">
+                <Lock size={14} />
+                <span>Sign In to Edit / Delete</span>
+              </Link>
+            )}
           </div>
         </div>
       </div>

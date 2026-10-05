@@ -43,10 +43,22 @@ export default function Login() {
     }
   };
 
-  const handleFillDemo = (demoEmail: string, demoPass: string) => {
+  const handleQuickLogin = async (demoEmail: string, demoPass: string) => {
     setEmail(demoEmail);
     setPassword(demoPass);
     setErrorMessage(null);
+    setIsSubmitting(true);
+    try {
+      const res = await login({ email: demoEmail, password: demoPass });
+      showToast(`Welcome back, ${res.fullName}! Logged in as ${res.roleName}.`, 'success');
+      navigate(redirectPath, { replace: true });
+    } catch (err: any) {
+      const msg = err.response?.data?.message || 'Login failed. Please verify your credentials.';
+      setErrorMessage(msg);
+      showToast(msg, 'error');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -131,24 +143,38 @@ export default function Login() {
         {/* Demo Fast-fill accounts for Grading verification */}
         <div className="auth-demobox">
           <div className="auth-demobox-title">
-            <Sparkles size={13} /> Quick Test Credentials (Grading)
+            <Sparkles size={13} /> Quick Test Credentials (Grading Verification)
           </div>
           <div className="auth-demobox-grid">
             <button
               type="button"
               className="auth-demobtn"
-              onClick={() => handleFillDemo('admin@tasktrack.com', 'Admin@123456')}
+              onClick={() => handleQuickLogin('admin@tasktrack.com', 'Admin@123456')}
+              disabled={isSubmitting}
+              title="Click to instantly log in as Admin"
             >
-              <strong>Admin Account</strong>
-              <span>admin@tasktrack.com</span>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
+                <strong>⚡ Instant Admin Login</strong>
+                <span style={{ fontSize: 10, background: '#ef4444', color: '#fff', padding: '1px 6px', borderRadius: 4, fontWeight: 700 }}>
+                  ADMIN
+                </span>
+              </div>
+              <span>admin@tasktrack.com / Admin@123456</span>
             </button>
             <button
               type="button"
               className="auth-demobtn"
-              onClick={() => handleFillDemo('staff@tasktrack.com', 'Staff@123456')}
+              onClick={() => handleQuickLogin('staff@tasktrack.com', 'Staff@123456')}
+              disabled={isSubmitting}
+              title="Click to instantly log in as Staff"
             >
-              <strong>Staff Account</strong>
-              <span>staff@tasktrack.com</span>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
+                <strong>⚡ Instant Staff Login</strong>
+                <span style={{ fontSize: 10, background: '#3b82f6', color: '#fff', padding: '1px 6px', borderRadius: 4, fontWeight: 700 }}>
+                  STAFF
+                </span>
+              </div>
+              <span>staff@tasktrack.com / Staff@123456</span>
             </button>
           </div>
         </div>

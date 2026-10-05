@@ -413,6 +413,36 @@
   gap: 12px;
 }
 
+.topbar-mode-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 11px;
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  transition: all var(--transition-fast);
+}
+
+.topbar-mode-badge.public {
+  background: rgba(100, 116, 139, 0.1);
+  color: var(--text-secondary);
+  border: 1px solid rgba(100, 116, 139, 0.2);
+}
+
+.topbar-mode-badge.staff {
+  background: rgba(37, 99, 235, 0.1);
+  color: #2563eb;
+  border: 1px solid rgba(37, 99, 235, 0.25);
+}
+
+.topbar-mode-badge.admin {
+  background: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+  border: 1px solid rgba(239, 68, 68, 0.25);
+}
+
 .topbar-right {
   display: flex;
   align-items: center;

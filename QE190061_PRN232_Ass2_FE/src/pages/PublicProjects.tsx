@@ -58,9 +58,9 @@ export default function PublicProjects() {
               <FolderKanban size={15} />
               <span>Project Cards</span>
             </Link>
-            <Link to="/projects/manage" className="view-toggle-btn">
+            <Link to="/admin/projects" className="view-toggle-btn">
               <Settings size={15} />
-              <span>Manage Table</span>
+              <span>Manage Table 🔒</span>
             </Link>
           </div>
         </div>

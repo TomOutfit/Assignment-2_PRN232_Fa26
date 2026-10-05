@@ -23,6 +23,8 @@ import {
   UserPlus,
   LogOut,
   FolderLock,
+  Lock,
+  Eye,
 } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 import { useAuth } from '../context/AuthContext';
@@ -71,12 +73,12 @@ export default function Layout({ children }: LayoutProps) {
 
   // Protected Management Navigation items
   const managementNavItems = [
-    { path: '/admin', label: 'Admin Hub', icon: Shield, exact: true },
-    { path: '/admin/departments', label: 'Manage Teams', icon: Users },
-    { path: '/admin/projects', label: 'Manage Projects', icon: FolderKanban },
-    { path: '/admin/tasks', label: 'Manage Tasks', icon: CheckSquare },
-    { path: '/admin/tags', label: 'Manage Tags', icon: Tag },
-    ...(isAdmin ? [{ path: '/admin/accounts', label: 'Manage Accounts', icon: ShieldCheck }] : []),
+    { path: '/admin', label: 'Admin Hub', icon: Shield, exact: true, adminOnly: false },
+    { path: '/admin/departments', label: 'Manage Departments', icon: Users, exact: false, adminOnly: false },
+    { path: '/admin/projects', label: 'Manage Projects', icon: FolderKanban, exact: false, adminOnly: false },
+    { path: '/admin/tasks', label: 'Manage Tasks', icon: CheckSquare, exact: false, adminOnly: false },
+    { path: '/admin/tags', label: 'Manage Tags', icon: Tag, exact: false, adminOnly: false },
+    { path: '/admin/accounts', label: 'User Accounts', icon: ShieldCheck, exact: false, adminOnly: true },
   ];
 
   return (
@@ -125,7 +127,14 @@ export default function Layout({ children }: LayoutProps) {
 
         {/* Sidebar Nav Links */}
         <nav className="sidebar-nav">
-          {!collapsed && <div className="sidebar-section-heading">EXPLORE (PUBLIC)</div>}
+          {!collapsed && (
+            <div className="sidebar-section-heading" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <span>EXPLORE (PUBLIC)</span>
+              <span style={{ fontSize: 9, fontWeight: 700, padding: '1px 5px', borderRadius: 4, background: 'rgba(59, 130, 246, 0.12)', color: '#3b82f6' }}>
+                READ-ONLY
+              </span>
+            </div>
+          )}
           {publicNavItems.map((item) => {
             const Icon = item.icon;
             return (
@@ -145,38 +154,54 @@ export default function Layout({ children }: LayoutProps) {
             );
           })}
 
-          {/* Protected Management Section */}
-          {isAuthenticated && (
-            <>
-              {!collapsed && (
-                <div className="sidebar-section-heading" style={{ marginTop: 16 }}>
-                  PROTECTED MANAGEMENT
-                </div>
+          {/* Section 2: Management (Protected) */}
+          {!collapsed && (
+            <div className="sidebar-section-heading" style={{ marginTop: 18, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <span>MANAGEMENT</span>
+              {isAuthenticated ? (
+                <span style={{ fontSize: 9, fontWeight: 700, padding: '1px 6px', borderRadius: 4, background: isAdmin ? 'rgba(239, 68, 68, 0.12)' : 'rgba(37, 99, 235, 0.12)', color: isAdmin ? '#ef4444' : '#2563eb' }}>
+                  {isAdmin ? '🛡️ ADMIN' : '👤 STAFF'}
+                </span>
+              ) : (
+                <span style={{ fontSize: 9, fontWeight: 700, padding: '1px 5px', borderRadius: 4, background: 'rgba(239, 68, 68, 0.1)', color: '#ef4444' }}>
+                  🔒 AUTH REQ.
+                </span>
               )}
-              {managementNavItems.map((item) => {
-                const Icon = item.icon;
-                return (
-                  <NavLink
-                    key={item.label}
-                    to={item.path}
-                    onClick={() => setMobileOpen(false)}
-                    className={({ isActive }) => `nav-item-link ${isActive ? 'nav-item-active' : ''}`}
-                    title={collapsed ? item.label : undefined}
-                    end={item.exact}
-                  >
-                    <div className="nav-item-icon" style={{ color: item.path === '/admin/accounts' ? '#ef4444' : undefined }}>
-                      <Icon size={18} strokeWidth={2} />
-                    </div>
-                    {!collapsed && (
-                      <span className="nav-item-label" style={{ fontWeight: item.exact ? 700 : undefined }}>
-                        {item.label}
+            </div>
+          )}
+          {managementNavItems.map((item) => {
+            const Icon = item.icon;
+            const isRestrictedForStaff = item.adminOnly && !isAdmin;
+            return (
+              <NavLink
+                key={item.label}
+                to={item.path}
+                onClick={() => setMobileOpen(false)}
+                className={({ isActive }) => `nav-item-link ${isActive ? 'nav-item-active' : ''}`}
+                title={collapsed ? `${item.label}${!isAuthenticated ? ' (Login Required)' : isRestrictedForStaff ? ' (Admin Only)' : ''}` : undefined}
+                end={item.exact}
+              >
+                <div className="nav-item-icon" style={{ color: item.adminOnly ? '#ef4444' : undefined }}>
+                  <Icon size={18} strokeWidth={2} />
+                </div>
+                {!collapsed && (
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%', overflow: 'hidden' }}>
+                    <span className="nav-item-label" style={{ fontWeight: item.exact ? 700 : undefined }}>
+                      {item.label}
+                    </span>
+                    {item.adminOnly && (
+                      <span style={{ fontSize: 9, fontWeight: 700, padding: '1px 4px', borderRadius: 3, background: 'rgba(239, 68, 68, 0.12)', color: '#ef4444', marginLeft: 4 }}>
+                        ADMIN
                       </span>
                     )}
-                  </NavLink>
-                );
-              })}
-            </>
-          )}
+                    {!isAuthenticated && !item.adminOnly && (
+                      <Lock size={12} style={{ color: 'var(--text-tertiary, #9CA3AF)', opacity: 0.7, marginLeft: 4, flexShrink: 0 }} />
+                    )}
+                  </div>
+                )}
+              </NavLink>
+            );
+          })}
         </nav>
 
         {/* Sidebar Footer with Theme Toggle & User Profile */}
@@ -302,6 +327,19 @@ export default function Layout({ children }: LayoutProps) {
             >
               <Menu size={20} />
             </button>
+
+            {/* Role & Access Mode Indicator */}
+            {isAuthenticated ? (
+              <div className={`topbar-mode-badge ${isAdmin ? 'admin' : 'staff'}`}>
+                {isAdmin ? <ShieldCheck size={13} /> : <UserCheck size={13} />}
+                <span>{isAdmin ? 'Admin Mode (Full Write)' : 'Staff Mode (Write Access)'}</span>
+              </div>
+            ) : (
+              <div className="topbar-mode-badge public">
+                <Eye size={13} />
+                <span>Public Mode (Read-Only)</span>
+              </div>
+            )}
           </div>
 
           {/* Center / Right Header Tools */}

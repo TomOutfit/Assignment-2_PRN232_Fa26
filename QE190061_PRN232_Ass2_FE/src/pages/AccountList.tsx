@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
+import { Link } from 'react-router-dom';
 import { accountApi } from '../services/api';
 import type { Account } from '../types';
 import { useToast } from '../context/ToastContext';
@@ -13,6 +14,9 @@ import {
   Search,
   Clock,
   Briefcase,
+  ChevronRight,
+  ArrowLeft,
+  UserPlus,
 } from 'lucide-react';
 
 export default function AccountList() {
@@ -113,7 +117,37 @@ export default function AccountList() {
   );
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+      {/* Breadcrumb Navigation */}
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 8 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 13, color: 'var(--text-secondary)' }}>
+          <Link to="/admin" style={{ color: 'var(--accent-primary)', textDecoration: 'none', fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: 4 }}>
+            <ArrowLeft size={14} /> Admin Hub
+          </Link>
+          <ChevronRight size={14} />
+          <span style={{ fontWeight: 600, color: 'var(--text-primary)' }}>System Accounts</span>
+        </div>
+
+        <Link
+          to="/register"
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: 6,
+            padding: '7px 14px',
+            borderRadius: 8,
+            backgroundColor: 'var(--accent-primary)',
+            color: '#fff',
+            fontSize: 12,
+            fontWeight: 600,
+            textDecoration: 'none',
+          }}
+        >
+          <UserPlus size={14} />
+          <span>Register New Staff</span>
+        </Link>
+      </div>
+
       {/* Header Banner */}
       <div
         style={{
