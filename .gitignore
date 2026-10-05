@@ -34,9 +34,9 @@ Thumbs.db
 
 # Documents, Database Scripts & Duplicate Solution Files
 *.doc
-*.docx
 *.sql
-*.slnx
+!TaskManagementDB_assignment2.sql
+!TaskManagementDB_assignment1.sql
 
 # Agents & AI configs
 .agents/
