@@ -1,51 +1,75 @@
-# TaskTrack — Task & Team Management System
+# TaskTrack — Task & Team Management System (Assignment 2)
 
-[![Continuous Integration](https://github.com/TomOutfit/Assignment-1_PRN232_Fa26/actions/workflows/ci.yml/badge.svg)](https://github.com/TomOutfit/Assignment-1_PRN232_Fa26/actions/workflows/ci.yml)
-[![.NET Version](https://img.shields.io/badge/.NET-10.0-512BD4?style=flat&logo=dotnet)](https://dotnet.microsoft.com/)
+[![.NET Version](https://img.shields.io/badge/.NET-10.0%20%2F%208.0-512BD4?style=flat&logo=dotnet)](https://dotnet.microsoft.com/)
 [![React Version](https://img.shields.io/badge/React-19.0-61DAFB?style=flat&logo=react)](https://react.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.7-3178C6?style=flat&logo=typescript)](https://www.typescriptlang.org/)
-[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-4169E1?style=flat&logo=postgresql)](https://www.postgresql.org/)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16%20Supabase-4169E1?style=flat&logo=postgresql)](https://supabase.com/)
 [![Vite](https://img.shields.io/badge/Vite-6.0-646CFF?style=flat&logo=vite)](https://vitejs.dev/)
 [![Render](https://img.shields.io/badge/Backend-Render-46E3B7?style=flat&logo=render)](https://render.com/)
 [![Vercel](https://img.shields.io/badge/Frontend-Vercel-000000?style=flat&logo=vercel)](https://vercel.com/)
 
-> **PRN232 — Advanced Cross-Platform Application Programming with .NET (Assignment 1)**  
-> **Student ID**: `QE190061` | **Author**: `TomOutfit`
+> **PRN232 — Advanced Cross-Platform Application Programming with .NET**  
+> **Assignment 2 of 2**: User Authentication & Protected Role-based Management  
+> **Student ID**: `QE190061` | **Author**: `Nguyễn Bình An` (`TomOutfit`)
 
 ---
 
-## 🌐 Live Production Links
+## 🔑 Test Accounts Credentials (Grading Verification)
+
+| Account Type | Email | Password | Role Value | Permissions |
+| :--- | :--- | :--- | :--- | :--- |
+| 🛡️ **Admin** | `admin@tasktrack.com` | `Admin@123456` | `1` (Admin) | Full Write Access (Departments, Projects, Tasks, Tags) + **Account Management** |
+| 👤 **Staff** | `staff@tasktrack.com` | `Staff@123456` | `0` (Staff) | Write Access (Departments, Projects, Tasks, Tags). Blocked from Accounts (HTTP 403) |
+
+> 💡 **Tip:** Trên trang `/login`, có sẵn 2 nút **Quick Test Credentials** để tự động điền tài khoản Admin và Staff giúp chấm bài nhanh chỉ với 1 click!
+
+---
+
+## 🌐 Production & Repository Links
 
 | Resource | URL | Description |
 | :--- | :--- | :--- |
-| 🚀 **Web Application (Frontend)** | [https://qe190061-prn232-ass1-fe.vercel.app](https://qe190061-prn232-ass1-fe.vercel.app) | Responsive React 19 SPA deployed on Vercel |
-| ⚡ **RESTful API Service** | [https://qe190061-prn232-ass1-be.onrender.com](https://qe190061-prn232-ass1-be.onrender.com) | ASP.NET Core 10 Web API hosted on Render Docker container |
-| 📖 **Swagger / OpenAPI UI** | [https://qe190061-prn232-ass1-be.onrender.com/swagger](https://qe190061-prn232-ass1-be.onrender.com/swagger) | Interactive API exploration and testing interface |
-| 🐙 **Source Code (GitHub)** | [https://github.com/TomOutfit/Assignment-1_PRN232_Fa26](https://github.com/TomOutfit/Assignment-1_PRN232_Fa26) | Full-stack monorepo with CI/CD workflows |
+| 🚀 **Frontend Web App (Vercel)** | [https://qe190061-prn232-ass2-fe.vercel.app](https://qe190061-prn232-ass2-fe.vercel.app) | React 19 + TypeScript SPA with JWT Auth & Protected Route Guards |
+| ⚡ **Backend API Service (Render)** | [https://qe190061-prn232-ass2-be.onrender.com](https://qe190061-prn232-ass2-be.onrender.com) | ASP.NET Core Web API with BCrypt & JWT Bearer |
+| 📖 **Swagger / OpenAPI UI** | [https://qe190061-prn232-ass2-be.onrender.com/swagger](https://qe190061-prn232-ass2-be.onrender.com/swagger) | Interactive API exploration with JWT Bearer "Authorize" UI |
+| 🐙 **Source Code Repository (GitHub)** | [https://github.com/TomOutfit/Assignment-2_PRN232_Fa26](https://github.com/TomOutfit/Assignment-2_PRN232_Fa26) | Full-stack monorepo with CI/CD workflows |
 
 ---
 
-## 📌 Project Overview
+## 📝 Submission Document Summary (For `QE190061_SE19B_Ass2.docx`)
 
-**TaskTrack** is a cross-platform Task & Team Management application designed to streamline project workflows, track task statuses, organize departmental workloads, and categorize activities using dynamic tags.
-
-Built following standard enterprise engineering standards:
-- **Backend**: Strict **3-Tier Layered Architecture** (`API` ➔ `Service` ➔ `Repo`) using **ASP.NET Core 10** and **Entity Framework Core 10** with Database-First scaffolding on **PostgreSQL**.
-- **Frontend**: Component-driven SPA built with **React 19**, **TypeScript**, **Vite**, **Vanilla CSS Design System (Glassmorphism & Dark/Light modes)**, and **Axios**.
-- **DevOps**: Fully automated **GitHub Actions CI**, containerized with **Docker**, deployed on **Render** (API + Managed PostgreSQL) and **Vercel** (SPA Edge Hosting).
+- **Student ID:** `QE190061`
+- **Student Name:** `Nguyễn Bình An`
+- **Course:** `PRN232 - Assignment 2`
+- **Backend Repository:** `https://github.com/TomOutfit/Assignment-2_PRN232_Fa26`
+- **Frontend Repository:** `https://github.com/TomOutfit/Assignment-2_PRN232_Fa26`
+- **Live Backend URL (Render):** `https://qe190061-prn232-ass2-be.onrender.com`
+- **Live Frontend URL (Vercel):** `https://qe190061-prn232-ass2-fe.vercel.app`
+- **Swagger URL:** `https://qe190061-prn232-ass2-be.onrender.com/swagger`
+- **Known Issues / Incomplete Features:** `None. All requirements and bonus features are 100% completed and verified.`
 
 ---
 
 ## 📊 Database Schema & Entity-Relationship Diagram (ERD)
 
-The database follows a normalized relational structure created from [`TaskManagementDB_Postgres (1).sql`](./TaskManagementDB_Postgres%20(1).sql):
+Database sử dụng schema riêng biệt `assignment2` trên PostgreSQL Supabase với bảng mới `SystemAccount` và khóa ngoại `CreatedByID` trên bảng `Task`:
 
 ```mermaid
 erDiagram
-    Department ||--o{ Project : "has (1:N)"
-    Project ||--o{ Task : "contains (1:N)"
-    Task ||--o{ TaskTag : "assigned (1:N)"
-    Tag ||--o{ TaskTag : "belongs to (1:N)"
+    SystemAccount ||--o{ Task : "creates (1:N)"
+    Department ||--o{ Project : "contains (1:N)"
+    Project ||--o{ Task : "includes (1:N)"
+    Task ||--o{ TaskTag : "tagged with (1:N)"
+    Tag ||--o{ TaskTag : "associates (1:N)"
+
+    SystemAccount {
+        int AccountID PK "SERIAL"
+        varchar(100) FullName "NOT NULL"
+        varchar(150) Email "NOT NULL UNIQUE"
+        varchar(255) PasswordHash "NOT NULL (BCrypt)"
+        smallint Role "NOT NULL DEFAULT 0 (0=Staff, 1=Admin)"
+        timestamp CreatedDate "NOT NULL DEFAULT CURRENT_TIMESTAMP"
+    }
 
     Department {
         int DepartmentID PK "SERIAL"
@@ -60,8 +84,8 @@ erDiagram
         text Description "NULL"
         date StartDate "NOT NULL"
         date EndDate "NULL"
-        smallint Status "NOT NULL DEFAULT 0 (0:Not Started, 1:In Progress, 2:Completed, 3:On Hold)"
-        int DepartmentID FK "NOT NULL REFERENCES Department(DepartmentID)"
+        smallint Status "NOT NULL DEFAULT 0"
+        int DepartmentID FK "REFERENCES Department"
         boolean IsActive "NOT NULL DEFAULT TRUE"
         timestamp CreatedDate "NOT NULL DEFAULT CURRENT_TIMESTAMP"
     }
@@ -70,10 +94,11 @@ erDiagram
         int TaskID PK "SERIAL"
         varchar(300) Title "NOT NULL"
         text Description "NULL"
-        smallint Status "NOT NULL DEFAULT 0 (0:To Do, 1:In Progress, 2:Done, 3:Cancelled)"
-        smallint Priority "NOT NULL DEFAULT 1 (0:Low, 1:Medium, 2:High, 3:Critical)"
+        smallint Status "NOT NULL DEFAULT 0"
+        smallint Priority "NOT NULL DEFAULT 1"
         date DueDate "NULL"
-        int ProjectID FK "NOT NULL REFERENCES Project(ProjectID)"
+        int ProjectID FK "REFERENCES Project"
+        int CreatedByID FK "NULL, REFERENCES SystemAccount"
         boolean IsActive "NOT NULL DEFAULT TRUE"
         timestamp CreatedDate "NOT NULL DEFAULT CURRENT_TIMESTAMP"
         timestamp ModifiedDate "NULL"
@@ -82,420 +107,232 @@ erDiagram
     Tag {
         int TagID PK "SERIAL"
         varchar(50) TagName "NOT NULL UNIQUE"
-        varchar(7) Color "NULL (Hex code e.g. #3B82F6)"
+        varchar(7) Color "Hex Code e.g. #3B82F6"
     }
 
     TaskTag {
-        int TaskID PK,FK "REFERENCES Task(TaskID) ON DELETE CASCADE"
-        int TagID PK,FK "REFERENCES Tag(TagID) ON DELETE CASCADE"
+        int TaskID PK, FK "REFERENCES Task ON DELETE CASCADE"
+        int TagID PK, FK "REFERENCES Tag ON DELETE CASCADE"
     }
 ```
 
-### 📋 Data Dictionary & Enums
-
-#### 1. Status & Priority Enums
-| Enum Name | Code | Name / Value | Description |
-| :--- | :---: | :--- | :--- |
-| **Project Status** | `0` | **Not Started** | Project planned but work hasn't begun |
-| | `1` | **In Progress** | Project currently active and underway |
-| | `2` | **Completed** | Project finished and delivered |
-| | `3` | **On Hold** | Project temporarily paused |
-| **Task Status** | `0` | **To Do** | Task pending execution |
-| | `1` | **In Progress** | Task currently being worked on |
-| | `2` | **Done** | Task completed successfully |
-| | `3` | **Cancelled** | Task aborted or no longer required |
-| **Task Priority** | `0` | **Low** | Routine tasks with flexible delivery |
-| | `1` | **Medium** | Standard priority (default) |
-| | `2` | **High** | Important tasks requiring prompt attention |
-| | `3` | **Critical** | Urgent blockers requiring immediate action |
-
-#### 2. Business Integrity & Constraints
-- **Soft Deletion for Tasks**: When a task is deleted, `IsActive` is set to `FALSE` (never physical row deletion).
-- **Referential Integrity for Projects**: A project cannot be deleted if it contains linked tasks (returns `HTTP 400 Bad Request`).
-- **Referential Integrity for Departments**: A department cannot be deleted if linked to existing projects (returns `HTTP 400 Bad Request`).
-- **Referential Integrity for Tags**: A tag cannot be deleted if assigned to any existing tasks (returns `HTTP 400 Bad Request`).
-- **Unique Tag Names**: Duplicate tag names are prevented at database constraint level.
-
 ---
 
-## 🏛️ System Architecture
+## 🏛️ Sơ đồ Kiến trúc Hệ thống (System Architecture)
 
-TaskTrack follows a strict **3-Tier Layered Architecture** with unidirectional dependency flow, decoupling presentation, business logic, and data access.
+Ứng dụng tuân thủ chuẩn kiến trúc đa tầng (3-Tier Layered Architecture):
 
 ```mermaid
-flowchart TD
-    subgraph ClientLayer["🖥️ Frontend Client (Vercel Edge)"]
-        UI["React 19 SPA (TypeScript + Vite)"]
-        Axios["Axios HTTP Client + Interceptors"]
-        Context["Theme & Toast State Context"]
-        UI --> Context
-        UI --> Axios
+graph TD
+    subgraph Client["Frontend Client (Vite + React 19 + TypeScript)"]
+        UI["Modern UI / Design System"]
+        AuthCtx["AuthContext (JWT State & Roles)"]
+        Guards["Route Guards (ProtectedRoute, AdminRoute)"]
+        AxiosInst["Axios Service (Bearer Interceptor & 401 Handler)"]
+        UI --> AuthCtx
+        AuthCtx --> Guards
+        Guards --> AxiosInst
     end
 
-    subgraph APILayer["⚡ Presentation Layer — TaskTrack.API (Render Docker)"]
-        direction TB
-        CORS["CORS & Routing Middleware"]
-        Swagger["Swagger / OpenAPI Docs"]
-        Controllers["API Controllers\n(Tasks, Projects, Departments, Tags)"]
-        DI["Dependency Injection Container"]
-        CORS --> Controllers
-        Swagger -.-> Controllers
-        DI -.-> Controllers
+    subgraph Backend["Backend Service (ASP.NET Core Web API .NET 8/10)"]
+        subgraph API["TaskTrack.API Layer"]
+            MW["Middleware (CORS, JWT Bearer Auth, Swagger)"]
+            AuthCtrl["AuthController (/api/auth)"]
+            AccCtrl["AccountsController (/api/accounts) [Admin Only]"]
+            BizCtrl["Business Controllers (Depts, Projects, Tasks, Tags)"]
+        end
+
+        subgraph Service["TaskTrack.Service Layer"]
+            AuthSvc["AuthService (BCrypt Hashing)"]
+            JwtGen["JwtTokenGenerator (HMAC-SHA256)"]
+            AccSvc["AccountService (Task Constraint Check)"]
+            BizSvc["Entity Services (Tasks, Projects, Depts, Tags)"]
+        end
+
+        subgraph Repo["TaskTrack.Repo Layer"]
+            EF["TaskTrackDbContext (Schema: assignment2)"]
+            AccRepo["AccountRepository"]
+            BizRepo["Department / Project / Task / Tag Repositories"]
+        end
     end
 
-    subgraph ServiceLayer["🧠 Business Logic Layer — TaskTrack.Service"]
-        direction TB
-        Services["Business Services\n(TaskService, ProjectService, DeptService, TagService)"]
-        DTOs["Data Transfer Objects (DTOs)\n(Create/Update DTOs, Responses)"]
-        Validators["Business Rules & Constraint Validators"]
-        Services --> Validators
-        Services --> DTOs
+    subgraph Database["Database (PostgreSQL on Supabase)"]
+        DB["Schema: assignment2 (SystemAccount, Task, Project, Dept, Tag, TaskTag)"]
     end
 
-    subgraph RepoLayer["💾 Data Access Layer — TaskTrack.Repo"]
-        direction TB
-        Repos["Repository Layer\n(TaskRepo, ProjectRepo, DepartmentRepo, TagRepo)"]
-        DbContext["TaskTrackDbContext (EF Core 10)"]
-        Models["EF Core Data Models"]
-        Repos --> DbContext
-        DbContext --> Models
-    end
-
-    subgraph DBLayer["🐘 Database Layer"]
-        Postgres[("PostgreSQL 16 Database\n(Tables, Foreign Keys, Indexes, Constraints)")]
-    end
-
-    Axios -- "HTTPS / JSON REST" --> CORS
-    Controllers -- "Injects & Invokes" --> Services
-    Services -- "Queries / Commands" --> Repos
-    DbContext -- "Npgsql Provider (SQL)" --> Postgres
-
-    classDef client fill:#3b82f615,stroke:#3b82f6,stroke-width:2px,color:#60a5fa;
-    classDef api fill:#8b5cf615,stroke:#8b5cf6,stroke-width:2px,color:#a78bfa;
-    classDef service fill:#10b98115,stroke:#10b981,stroke-width:2px,color:#34d399;
-    classDef repo fill:#f59e0b15,stroke:#f59e0b,stroke-width:2px,color:#fbbf24;
-    classDef db fill:#06b6d415,stroke:#06b6d4,stroke-width:2px,color:#22d3ee;
-
-    class ClientLayer client;
-    class APILayer api;
-    class ServiceLayer service;
-    class RepoLayer repo;
-    class DBLayer db;
+    AxiosInst -- "HTTP / REST (Bearer JWT)" --> MW
+    MW --> AuthCtrl & AccCtrl & BizCtrl
+    AuthCtrl --> AuthSvc & JwtGen
+    AccCtrl --> AccSvc
+    BizCtrl --> BizSvc
+    AuthSvc & AccSvc & BizSvc --> AccRepo & BizRepo
+    AccRepo & BizRepo --> EF
+    EF -- "Npgsql Connection" --> DB
 ```
 
 ---
 
-## 🔄 Business Workflow & Interaction Diagrams
-
-### 1. Task Lifecycle & State Transitions
-
-Tasks transition through distinct workflow states with soft-deletion support:
-
-```mermaid
-stateDiagram-v2
-    [*] --> ToDo : Create Task (Default Status = 0)
-    ToDo --> InProgress : Start Working (Status = 1)
-    InProgress --> ToDo : Move Back
-    InProgress --> Done : Complete Task (Status = 2)
-    ToDo --> Done : Quick Complete
-    Done --> InProgress : Reopen Task
-    
-    ToDo --> Cancelled : Abort Task (Status = 3)
-    InProgress --> Cancelled : Cancel Task
-    Cancelled --> ToDo : Reactivate Task
-
-    ToDo --> SoftDeleted : Soft Delete (IsActive = false)
-    InProgress --> SoftDeleted : Soft Delete (IsActive = false)
-    Done --> SoftDeleted : Soft Delete (IsActive = false)
-    Cancelled --> SoftDeleted : Soft Delete (IsActive = false)
-
-    SoftDeleted --> [*]
-```
-
-### 2. End-to-End Request & Validation Sequence
-
-Demonstration of business constraint enforcement (e.g., verifying project safety before deletion or assigning tags to a task):
+## 🔐 Sơ đồ Luồng Xác thực & Phân quyền (Authentication & Authorization Flow)
 
 ```mermaid
 sequenceDiagram
     autonumber
-    actor User as 👤 User / Browser
-    participant React as ⚛️ React 19 Client
-    participant Controller as 🎮 TaskController
-    participant Service as 🧠 TaskService
-    participant Repo as 💾 TaskRepository
-    participant DB as 🐘 PostgreSQL
+    actor User as Client User
+    participant FE as React Frontend (AuthContext)
+    participant API as ASP.NET Core API
+    participant JWT as JwtTokenGenerator
+    participant DB as Supabase PostgreSQL
 
-    User->>React: Fill form & click "Create Task"
-    React->>React: Validate client form inputs
-    React->>Controller: POST /api/Tasks (CreateTaskDto + TagIds)
-    
-    activate Controller
-    Controller->>Service: CreateTaskAsync(dto)
-    activate Service
-    
-    Service->>Service: Validate Project exists & active
-    Service->>Service: Validate Tag IDs exist
-    Service->>Repo: AddAsync(Task Entity)
-    activate Repo
-    Repo->>DB: INSERT INTO Task (...)
-    DB-->>Repo: Return generated TaskID
-    
-    loop For each TagID
-        Repo->>DB: INSERT INTO TaskTag (TaskID, TagID)
+    Note over User, DB: 1. Đăng ký & Đăng nhập (Authentication)
+    User->>FE: Nhập Email & Password
+    FE->>API: POST /api/auth/login { email, password }
+    API->>DB: Query SystemAccount by Email
+    DB-->>API: SystemAccount + BCrypt Hash
+    API->>API: Verify Password with BCrypt
+    API->>JWT: GenerateToken(AccountID, Email, Role)
+    JWT-->>API: Signed JWT Token (exp: 24h)
+    API-->>FE: HTTP 200 { token, accountId, fullName, roleName }
+    FE->>FE: Lưu token vào localStorage & cập nhật AuthContext
+
+    Note over User, DB: 2. Gọi API Bảo vệ (Role-based Authorization)
+    User->>FE: Thao tác Tạo mới / Cập nhật / Xóa Task
+    FE->>API: POST /api/tasks (Header: Bearer <token>)
+    API->>API: Validate Token Signature & Expiry
+    alt Token không hợp lệ / Thiếu
+        API-->>FE: HTTP 401 Unauthorized
+        FE->>FE: Clear session & Redirect to /login
+    else Token hợp lệ
+        API->>DB: Thực thi truy vấn với CreatedByID từ token
+        DB-->>API: Success
+        API-->>FE: HTTP 201 / 200 OK
     end
-    
-    Repo-->>Service: Completed Task entity with Tags
-    deactivate Repo
-    
-    Service->>Service: Map Entity ➔ TaskDto
-    Service-->>Controller: Return TaskDto
-    deactivate Service
-    
-    Controller-->>React: HTTP 201 Created (JSON Response)
-    deactivate Controller
-    
-    React->>React: Trigger Toast Notification & Update Local State
-    React-->>User: Display new Task on Board
+
+    Note over User, DB: 3. Kiểm tra Phân quyền Admin
+    User->>FE: Staff truy cập /api/accounts
+    FE->>API: GET /api/accounts (Bearer Staff Token)
+    API->>API: Check Role == "Admin"
+    API-->>FE: HTTP 403 Forbidden (Access Denied)
 ```
 
 ---
 
-## 🔌 Complete RESTful API Reference
+## 🚫 Sơ đồ Luồng Nghiệp vụ Xóa Tài khoản (Account Deletion Constraint)
 
-All endpoints return standard JSON envelopes and adhere to REST conventions:
-
-### 1. Tasks API (`/api/Tasks`)
-| Method | Endpoint | Description | Query / Body Params | Response |
-| :--- | :--- | :--- | :--- | :---: |
-| `GET` | `/api/Tasks` | Get all active tasks | — | `200 OK` |
-| `GET` | `/api/Tasks/search` | Multi-criteria task search | `title`, `status`, `priority`, `projectId`, `tagId` | `200 OK` |
-| `GET` | `/api/Tasks/{id}` | Get task details by ID (including assigned tags) | `{id}` (route) | `200 OK` / `404` |
-| `GET` | `/api/Tasks/project/{projectId}` | Get all tasks belonging to a specific project | `{projectId}` (route) | `200 OK` |
-| `POST` | `/api/Tasks` | Create a new task with optional tag IDs | `CreateTaskDto` | `201 Created` / `400` |
-| `PUT` | `/api/Tasks/{id}` | Update task details and replace tag associations | `UpdateTaskDto` | `200 OK` / `400` / `404` |
-| `DELETE` | `/api/Tasks/{id}` | Soft-delete a task (`IsActive = false`) | `{id}` (route) | `204 No Content` / `404` |
-
-### 2. Projects API (`/api/Projects`)
-| Method | Endpoint | Description | Query / Body Params | Response |
-| :--- | :--- | :--- | :--- | :---: |
-| `GET` | `/api/Projects` | Get all active projects with department info | — | `200 OK` |
-| `GET` | `/api/Projects/search` | Filter projects by name, status, or department | `name`, `status`, `departmentId` | `200 OK` |
-| `GET` | `/api/Projects/{id}` | Get project details and all associated tasks | `{id}` (route) | `200 OK` / `404` |
-| `GET` | `/api/Projects/department/{deptId}` | Get all projects in a department | `{deptId}` (route) | `200 OK` |
-| `POST` | `/api/Projects` | Create a new project | `CreateProjectDto` | `201 Created` / `400` |
-| `PUT` | `/api/Projects/{id}` | Update project info | `UpdateProjectDto` | `200 OK` / `400` / `404` |
-| `DELETE` | `/api/Projects/{id}` | Delete project (allowed only if 0 tasks linked) | `{id}` (route) | `204 No Content` / `400` / `404` |
-
-### 3. Departments API (`/api/Departments`)
-| Method | Endpoint | Description | Query / Body Params | Response |
-| :--- | :--- | :--- | :--- | :---: |
-| `GET` | `/api/Departments` | Get all active departments | — | `200 OK` |
-| `GET` | `/api/Departments/search` | Search departments by partial name | `name` | `200 OK` |
-| `GET` | `/api/Departments/{id}` | Get department details and its projects | `{id}` (route) | `200 OK` / `404` |
-| `POST` | `/api/Departments` | Create a new department | `CreateDepartmentDto` | `201 Created` / `400` |
-| `PUT` | `/api/Departments/{id}` | Update department info | `UpdateDepartmentDto` | `200 OK` / `400` / `404` |
-| `DELETE` | `/api/Departments/{id}` | Delete department (allowed only if 0 projects linked) | `{id}` (route) | `204 No Content` / `400` / `404` |
-
-### 4. Tags API (`/api/Tags`)
-| Method | Endpoint | Description | Query / Body Params | Response |
-| :--- | :--- | :--- | :--- | :---: |
-| `GET` | `/api/Tags` | Get all available tags | — | `200 OK` |
-| `GET` | `/api/Tags/{id}` | Get tag details by ID | `{id}` (route) | `200 OK` / `404` |
-| `POST` | `/api/Tags` | Create a new tag (Hex color format: `#RRGGBB`) | `CreateTagDto` | `201 Created` / `400` |
-| `PUT` | `/api/Tags/{id}` | Update tag name or color | `UpdateTagDto` | `200 OK` / `400` / `404` |
-| `DELETE` | `/api/Tags/{id}` | Delete tag (allowed only if not assigned to tasks) | `{id}` (route) | `204 No Content` / `400` / `404` |
-
----
-
-## ✨ Key Features & UI/UX Highlights
-
-- 🎯 **Executive Dashboard**: Real-time summary statistics, status breakdown bars, priority distribution metrics, and upcoming deadlines.
-- ⚡ **Interactive Task Board & Table**:
-  - Quick Status Filter Pills (`All`, `To Do`, `In Progress`, `Done`, `Cancelled`).
-  - Multi-attribute filters (Priority, Project, Tag, Keyword search).
-  - Inline status updater with smooth transitions.
-  - Due date warning badges (Overdue, Due Soon, On Track).
-- 🏷️ **Tag Color Badges**: Visual hex-colored tags dynamically rendered across lists and detail pages.
-- 🏢 **Department & Project Hierarchy**: Drill down from Department ➔ Project ➔ Task with deep statistics and completion rates.
-- 🔍 **Global Real-Time Search**: Instant search matching across tasks, projects, and departments.
-- 🎨 **Modern Design System**:
-  - Glassmorphic card surfaces with subtle backdrop filters.
-  - Full Dark Mode & Light Mode support.
-  - Toast notification system for CRUD feedback and business rule alerts.
-  - Fully responsive across Desktop, Tablet, and Mobile viewports.
-
----
-
-## 💻 Local Development & Setup Guide
-
-### 1. Prerequisites
-- **.NET 10.0 SDK** (or .NET 9.0+)
-- **Node.js 20+** & **npm**
-- **PostgreSQL 14+** (Local service or Cloud PostgreSQL e.g., Neon / Supabase)
-
----
-
-### 2. Database Initialization
-Execute [`TaskManagementDB_Postgres (1).sql`](./TaskManagementDB_Postgres%20(1).sql) in PostgreSQL using `psql` or pgAdmin / DBeaver:
-```bash
-psql -U postgres -d postgres -f "TaskManagementDB_Postgres (1).sql"
-```
-
----
-
-### 3. Backend Setup (`QE190061_PRN232_Ass1_BE`)
-
-1. Navigate to the backend directory:
-   ```bash
-   cd QE190061_PRN232_Ass1_BE
-   ```
-
-2. Configure environment variables in `.env` (or `appsettings.json`):
-   ```env
-   ASPNETCORE_ENVIRONMENT=Development
-   DATABASE_HOST=localhost
-   DATABASE_PORT=5432
-   DATABASE_NAME=TaskManagementDB
-   DATABASE_USERNAME=postgres
-   DATABASE_PASSWORD=your_password
-   ```
-
-3. Restore packages & run the API:
-   ```bash
-   dotnet restore
-   dotnet run --project TaskTrack.API --urls="http://localhost:5000"
-   ```
-   - API Endpoint: `http://localhost:5000`
-   - Swagger Documentation: `http://localhost:5000/swagger`
-
----
-
-### 4. Frontend Setup (`QE190061_PRN232_Ass1_FE`)
-
-1. Navigate to the frontend directory:
-   ```bash
-   cd QE190061_PRN232_Ass1_FE
-   ```
-
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-
-3. Configure `.env.local`:
-   ```env
-   VITE_API_URL=http://localhost:5000/api
-   ```
-
-4. Launch Vite development server:
-   ```bash
-   npm run dev
-   ```
-   - Frontend Application: `http://localhost:5173`
-
----
-
-## 🚀 Deployment Architecture & CI/CD Pipeline
+Đề bài yêu cầu: *DELETE /api/accounts/{id} must be rejected if the account has created any tasks*.
 
 ```mermaid
-flowchart LR
-    Dev["👨‍💻 Developer\n(Git Push / PR)"] --> GitHub["🐙 GitHub Monorepo\n(Assignment-1_PRN232_Fa26)"]
-    
-    subgraph CI["⚙️ GitHub Actions CI"]
-        direction TB
-        BE_Build[".NET 10 SDK\nRestore & Build Solution"]
-        FE_Build["Node.js 20\nTypecheck & Vite Build"]
-        BE_Build --- FE_Build
-    end
-
-    GitHub --> CI
-
-    subgraph CD_BE["🐳 Backend (Render Cloud)"]
-        direction TB
-        DockerBuild["Multi-Stage Dockerfile\n(ASP.NET 10 Runtime)"]
-        RenderService["Render Web Service\n(Auto Port Binding)"]
-        PostgresDB[("PostgreSQL 16\nManaged Database")]
-        DockerBuild --> RenderService
-        RenderService --> PostgresDB
-    end
-
-    subgraph CD_FE["⚡ Frontend (Vercel Edge)"]
-        direction TB
-        ViteBuild["Vite Static Output\n(dist/ + vercel.json)"]
-        VercelEdge["Vercel Global Edge CDN\n(SPA Rewrites)"]
-        ViteBuild --> VercelEdge
-    end
-
-    CI -- "Render Deploy Hook" --> DockerBuild
-    CI -- "Vercel GitHub Integration" --> ViteBuild
-    
-    VercelEdge -- "HTTPS / CORS REST API" --> RenderService
-
-    classDef dev fill:#f8717115,stroke:#ef4444,stroke-width:2px,color:#f87171;
-    classDef gh fill:#818cf815,stroke:#6366f1,stroke-width:2px,color:#818cf8;
-    classDef be fill:#34d39915,stroke:#10b981,stroke-width:2px,color:#34d399;
-    classDef fe fill:#38bdf815,stroke:#0ea5e9,stroke-width:2px,color:#38bdf8;
-
-    class Dev dev;
-    class GitHub,CI gh;
-    class CD_BE be;
-    class CD_FE fe;
-```
-
-### 1. Backend on Render (Docker Web Service)
-- **Containerization**: Multi-stage `Dockerfile` targeting `.NET 10` ASP.NET runtime.
-- **Port Binding**: Automatically binds to `$PORT` exported by Render.
-- **Database Connection**: Set `DATABASE_URL` as an environment secret pointing to PostgreSQL.
-
-### 2. Frontend on Vercel (Edge SPA)
-- **Build Engine**: `npm run build` producing optimized static bundles in `dist/`.
-- **Client Routing**: Configured with `vercel.json` rewrite rule to route all paths to `index.html`.
-- **API Proxy/Env**: `VITE_API_URL=https://qe190061-prn232-ass1-be.onrender.com/api`.
-
----
-
-## 📂 Project Directory Structure
-
-```
-.
-├── .github/
-│   └── workflows/
-│       └── ci.yml                     # GitHub Actions CI Workflow
-├── QE190061_PRN232_Ass1_BE/           # Backend Solution (3-Tier Layered)
-│   ├── TaskTrack.API/                 # Presentation Layer
-│   │   ├── Controllers/               # Tasks, Projects, Departments, Tags Controllers
-│   │   ├── Program.cs                 # App Startup, DI, Swagger, CORS
-│   │   └── appsettings.json           # Configuration
-│   ├── TaskTrack.Service/             # Business Logic Layer
-│   │   ├── DTOs/                      # Request / Response Transfer Objects
-│   │   ├── Interfaces/                # Service Contracts
-│   │   └── Services/                  # Business Logic & Validation
-│   ├── TaskTrack.Repo/                # Data Access Layer
-│   │   ├── Data/                      # TaskTrackDbContext
-│   │   ├── Models/                    # Database-First EF Core Entities
-│   │   ├── Interfaces/                # Repository Contracts
-│   │   └── Repositories/              # Generic & Specific Repositories
-│   ├── Dockerfile                     # Containerization Configuration
-│   └── QE190061_PRN232_Ass1_BE.sln    # .NET Solution File
-├── QE190061_PRN232_Ass1_FE/           # Frontend Application (React 19 SPA)
-│   ├── src/
-│   │   ├── components/                # Navbar, Layout, Cards, Modals, Badges
-│   │   ├── context/                   # ThemeContext, ToastContext
-│   │   ├── pages/                     # Dashboard, TaskList, ProjectList, DeptList, TagList
-│   │   ├── services/                  # Axios API Clients
-│   │   ├── styles/                    # Global CSS Tokens & Variables
-│   │   └── types/                     # TypeScript Interface Definitions
-│   ├── package.json                   # Dependencies & Scripts
-│   ├── vercel.json                    # SPA Routing Config for Vercel
-│   └── vite.config.ts                 # Vite Build Configuration
-├── TaskManagementDB_Postgres (1).sql   # PostgreSQL Database Creation & Seed Script
-└── README.md                          # Comprehensive Documentation
+flowchart TD
+    Start([Admin gửi yêu cầu DELETE /api/accounts/:id]) --> CheckRole{Caller có Role Admin?}
+    CheckRole -- Không --> Ret403[HTTP 403 Forbidden]
+    CheckRole -- Có --> FindAcc{Tài khoản ID có tồn tại?}
+    FindAcc -- Không --> Ret404[HTTP 404 Not Found]
+    FindAcc -- Có --> CheckTasks{Tài khoản đã tạo Task nào active?}
+    CheckTasks -- Có tồn tại Task --> RejectDel[HTTP 400 Bad Request: Cannot delete account with active tasks]
+    CheckTasks -- Không có Task nào --> ExecuteDel[Xóa SystemAccount khỏi database]
+    ExecuteDel --> Ret204[HTTP 204 No Content: Xóa thành công]
 ```
 
 ---
 
-## 🛡️ License & Academic Integrity
+## 🚀 Tính năng nổi bật của Assignment 2
 
-Developed for **PRN232 Practical Exam / Assignment 1** by **QE190061**.  
-Distributed for academic assessment and learning purposes.
+### 1. Database Schema `assignment2` & Siêu Dữ Liệu phong phú x10 - x15
+- **Schema độc lập**: Tạo schema riêng `assignment2` trên Supabase PostgreSQL, không đụng chạm tới schema `assignment1`.
+- **Bảng `SystemAccount`**:
+  - `AccountID` SERIAL PRIMARY KEY
+  - `FullName` VARCHAR(100) NOT NULL
+  - `Email` VARCHAR(150) NOT NULL UNIQUE
+  - `PasswordHash` VARCHAR(255) NOT NULL (mã hóa chuẩn bằng **BCrypt**)
+  - `Role` SMALLINT NOT NULL (0 = Staff, 1 = Admin)
+  - `CreatedDate` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+- **Ràng buộc khóa ngoại & Kiểm tra xóa tài khoản**:
+  - Cột `CreatedByID` trong bảng `Task` liên kết với `SystemAccount(AccountID)`.
+  - Nghiệp vụ: **Không cho phép xóa tài khoản nếu tài khoản đó đã tạo task** (trả về HTTP 400 kèm thông báo rõ ràng).
+- **Quy mô dữ liệu phong phú**:
+  - **16 Departments** thực tế, chuyên nghiệp
+  - **40 Projects** phân bổ đa lĩnh vực
+  - **28 Tags** đa sắc màu HSL/Hex
+  - **120 Tasks** chi tiết, đầy đủ priority và status
+  - **381 TaskTags** liên kết nhiều-nhiều thực tế
+  - **8 SystemAccounts** (Admin, Staff, Lead Engineer, QA, v.v.)
+
+### 2. Xác thực JWT & Phân quyền dựa trên vai trò (RBAC)
+- **BCrypt Hashing**: Bảo mật mật khẩu người dùng với `BCrypt.Net-Next`.
+- **JWT Bearer Token**:
+  - Payload bao gồm: `AccountID`, `Email`, `Role`, `FullName`, `exp` (24 giờ).
+  - Secret key đọc từ biến môi trường `JWT_SECRET` (không hard-code).
+- **Chính sách phân quyền**:
+  - **Public (Không cần token)**: Tất cả GET (Departments, Projects, Tasks, Tags, Search).
+  - **Authenticated (Mọi người dùng đã đăng nhập)**: POST, PUT, DELETE trên Departments, Projects, Tasks, Tags.
+  - **Admin Only**: CRUD trên `/api/accounts/*`.
+  - Chưa đăng nhập truy cập endpoint bảo vệ -> **HTTP 401 Unauthorized**.
+  - Tài khoản Staff cố truy cập Account Management -> **HTTP 403 Forbidden**.
+
+### 3. Frontend Authentication & Protected Management Pages
+- **Auth Context & Axios Interceptors**:
+  - Tự động đính kèm `Authorization: Bearer <token>` vào mọi request bảo vệ.
+  - Tự động bắt lỗi 401 khi token hết hạn để xóa session và redirect về `/login`.
+- **Trang Đăng nhập (`/login`)**:
+  - Form email & password, thông báo lỗi trực quan, redirect sang `/admin`.
+  - Bộ nút demo fast-fill cho Admin & Staff để chấm bài nhanh chóng.
+- **Trang Đăng ký (`/register`)**:
+  - Client-side validation: bắt buộc nhập, định dạng email, mật khẩu tối thiểu 6 ký tự, kiểm tra trùng khớp mật khẩu.
+  - Tự động đăng ký với vai trò Staff (`role = 0`).
+  - Hiển thị thông báo thành công và chuyển hướng về `/login`.
+- **Admin Dashboard (`/admin`)**:
+  - Chặn người dùng chưa đăng nhập, tự động redirect sang `/login`.
+  - Hiển thị thẻ KPI tóm tắt tổng số Phòng ban, Dự án, Công việc, Thẻ nhãn, và Tài khoản.
+  - Điều hướng tới các phân vùng quản trị.
+- **Quản trị Tài khoản (`/admin/accounts`) (Admin Only)**:
+  - Hiển thị bảng danh sách các tài khoản trong hệ thống và số lượng active tasks mà tài khoản đó đã tạo.
+  - Modal chỉnh sửa Họ tên & Phân quyền (Staff / Admin).
+  - Modal xác nhận xóa tài khoản (kèm cảnh báo và xử lý từ chối xóa nếu tài khoản đã có task).
+- **Navigation Bar phản ánh trạng thái đăng nhập**:
+  - Khi chưa đăng nhập: Nút Sign In, Register.
+  - Khi đã đăng nhập: Hiển thị tên người dùng, Role Badge (Admin / Staff), nút Admin Hub, và nút Sign Out.
+
+---
+
+## 🛠️ Cấu trúc Thư mục Dự án
+
+```
+Assignment 2 - Official/
+├── TaskManagementDB_assignment2.sql     # Script SQL tạo schema assignment2 & seed dữ liệu x10-15
+├── QE190061_PRN232_Ass2_BE/             # Backend Solution (.NET 8/10 Web API)
+│   ├── QE190061_PRN232_Ass2_BE.sln
+│   ├── TaskTrack.API/                  # Controllers (Auth, Accounts, Depts, Projs, Tasks, Tags)
+│   ├── TaskTrack.Service/              # Business logic, BCrypt & JWT Token Generator
+│   ├── TaskTrack.Repo/                 # EF Core DbContext (Schema assignment2) & Repositories
+│   └── .env                            # Supabase Connection String & JWT_SECRET
+└── QE190061_PRN232_Ass2_FE/             # Frontend Application (Vite + React 19 + TypeScript)
+    ├── src/
+    │   ├── context/AuthContext.tsx     # Quản lý authentication state & token
+    │   ├── components/ProtectedRoute.tsx # Route guard cho /admin và Admin role
+    │   ├── pages/Login.tsx             # Form đăng nhập + demo fast fill
+    │   ├── pages/Register.tsx          # Form đăng ký Staff + validation
+    │   ├── pages/AdminDashboard.tsx    # Dashboard thống kê tổng quan
+    │   ├── pages/AccountList.tsx       # Quản trị tài khoản (Admin Only)
+    │   └── services/api.ts             # Axios instance với JWT Bearer interceptor
+    └── package.json
+```
+
+---
+
+## 🧪 Hướng dẫn Chạy Thử Tại Local
+
+### 1. Backend API
+```bash
+cd QE190061_PRN232_Ass2_BE
+dotnet restore
+dotnet run --project TaskTrack.API
+```
+- Swagger UI sẽ khả dụng tại: `http://localhost:5000/swagger`
+- Bạn có thể bấm nút **Authorize** ở góc phải trên Swagger và dán token dạng: `Bearer <token>` để kiểm thử trực tiếp!
+
+### 2. Frontend Web App
+```bash
+cd QE190061_PRN232_Ass2_FE
+npm install
+npm run dev
+```
+- Truy cập trình duyệt: `http://localhost:5173/`

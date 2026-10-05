@@ -21,10 +21,10 @@ jobs:
           dotnet-quality: 'preview'
 
       - name: Restore dependencies
-        run: dotnet restore QE190061_PRN232_Ass1_BE/QE190061_PRN232_Ass1_BE.sln
+        run: dotnet restore QE190061_PRN232_Ass2_BE/QE190061_PRN232_Ass2_BE.sln
 
       - name: Build backend solution
-        run: dotnet build QE190061_PRN232_Ass1_BE/QE190061_PRN232_Ass1_BE.sln --no-restore --configuration Release
+        run: dotnet build QE190061_PRN232_Ass2_BE/QE190061_PRN232_Ass2_BE.sln --no-restore --configuration Release
 
   frontend-ci:
     name: Frontend (React TypeScript) CI
@@ -38,16 +38,16 @@ jobs:
         with:
           node-version: '22'
           cache: 'npm'
-          cache-dependency-path: QE190061_PRN232_Ass1_FE/package-lock.json
+          cache-dependency-path: QE190061_PRN232_Ass2_FE/package-lock.json
 
       - name: Install dependencies
-        working-directory: QE190061_PRN232_Ass1_FE
+        working-directory: QE190061_PRN232_Ass2_FE
         run: npm ci
 
       - name: Lint frontend code
-        working-directory: QE190061_PRN232_Ass1_FE
+        working-directory: QE190061_PRN232_Ass2_FE
         run: npm run lint
 
       - name: Build frontend app
-        working-directory: QE190061_PRN232_Ass1_FE
+        working-directory: QE190061_PRN232_Ass2_FE
         run: npm run build
