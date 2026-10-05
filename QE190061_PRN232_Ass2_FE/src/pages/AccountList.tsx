@@ -157,10 +157,10 @@ export default function AccountList() {
           flexWrap: 'wrap',
           gap: 16,
           padding: '24px 28px',
-          borderRadius: 16,
-          background: 'var(--card-bg, #ffffff)',
-          border: '1px solid var(--border-color, #e5e7eb)',
-          boxShadow: '0 4px 12px rgba(0,0,0,0.03)',
+          borderRadius: 'var(--radius-xl)',
+          background: 'var(--bg-card)',
+          border: '1px solid var(--border-base)',
+          boxShadow: 'var(--shadow-sm)',
         }}
       >
         <div>
@@ -181,10 +181,10 @@ export default function AccountList() {
           >
             <ShieldCheck size={14} /> Admin Role Only
           </div>
-          <h1 style={{ fontSize: 24, fontWeight: 800, margin: '0 0 4px 0' }}>
+          <h1 style={{ fontSize: 24, fontWeight: 800, margin: '0 0 4px 0', fontFamily: 'var(--font-heading)', color: 'var(--text-primary)' }}>
             System Account Management
           </h1>
-          <p style={{ color: 'var(--text-secondary, #6B7280)', margin: 0, fontSize: 14 }}>
+          <p style={{ color: 'var(--text-secondary)', margin: 0, fontSize: 14 }}>
             Manage staff and administrator profiles, assign role privileges, and inspect task creator accountability.
           </p>
         </div>
@@ -200,7 +200,7 @@ export default function AccountList() {
           >
             <Search
               size={16}
-              style={{ position: 'absolute', left: 12, color: 'var(--text-tertiary, #9CA3AF)' }}
+              style={{ position: 'absolute', left: 12, color: 'var(--text-muted)' }}
             />
             <input
               type="text"
@@ -211,11 +211,11 @@ export default function AccountList() {
                 width: '100%',
                 padding: '9px 12px 9px 36px',
                 borderRadius: 8,
-                border: '1px solid var(--border-color, #d1d5db)',
+                border: '1px solid var(--border-base)',
                 fontSize: 13,
                 outline: 'none',
-                background: 'var(--input-bg, #ffffff)',
-                color: 'var(--text-primary, #111827)',
+                background: 'var(--bg-input)',
+                color: 'var(--text-primary)',
               }}
             />
           </div>
@@ -225,11 +225,11 @@ export default function AccountList() {
       {/* Account Table */}
       <div
         style={{
-          background: 'var(--card-bg, #ffffff)',
-          borderRadius: 16,
-          border: '1px solid var(--border-color, #e5e7eb)',
+          background: 'var(--bg-card)',
+          borderRadius: 'var(--radius-xl)',
+          border: '1px solid var(--border-base)',
           overflow: 'hidden',
-          boxShadow: '0 4px 12px rgba(0,0,0,0.03)',
+          boxShadow: 'var(--shadow-sm)',
         }}
       >
         <div style={{ overflowX: 'auto' }}>
@@ -237,9 +237,9 @@ export default function AccountList() {
             <thead>
               <tr
                 style={{
-                  borderBottom: '1px solid var(--border-color, #e5e7eb)',
-                  background: 'var(--table-header-bg, rgba(249, 250, 251, 0.7))',
-                  color: 'var(--text-secondary, #6B7280)',
+                  borderBottom: '1px solid var(--border-base)',
+                  background: 'var(--bg-secondary)',
+                  color: 'var(--text-secondary)',
                   fontSize: 12,
                   fontWeight: 600,
                   textTransform: 'uppercase',
@@ -369,8 +369,8 @@ export default function AccountList() {
                               gap: 4,
                               padding: '6px 12px',
                               borderRadius: 6,
-                              border: '1px solid var(--border-color, #d1d5db)',
-                              background: 'var(--card-bg, #ffffff)',
+                              border: '1px solid var(--border-base)',
+                              background: 'var(--bg-card)',
                               color: 'var(--text-primary)',
                               fontSize: 12,
                               fontWeight: 600,
@@ -420,8 +420,9 @@ export default function AccountList() {
           style={{
             position: 'fixed',
             inset: 0,
-            backgroundColor: 'rgba(0, 0, 0, 0.5)',
-            backdropFilter: 'blur(4px)',
+            backgroundColor: 'var(--bg-modal-backdrop)',
+            backdropFilter: 'blur(8px)',
+            WebkitBackdropFilter: 'blur(8px)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -433,11 +434,11 @@ export default function AccountList() {
             style={{
               width: '100%',
               maxWidth: 480,
-              backgroundColor: 'var(--card-bg, #ffffff)',
-              borderRadius: 16,
-              boxShadow: '0 20px 40px rgba(0,0,0,0.2)',
+              backgroundColor: 'var(--bg-card)',
+              borderRadius: 'var(--radius-xl)',
+              boxShadow: 'var(--shadow-xl)',
               overflow: 'hidden',
-              border: '1px solid var(--border-color, #e5e7eb)',
+              border: '1px solid var(--border-base)',
             }}
           >
             <div
@@ -446,10 +447,10 @@ export default function AccountList() {
                 justifyContent: 'space-between',
                 alignItems: 'center',
                 padding: '20px 24px',
-                borderBottom: '1px solid var(--border-color, #e5e7eb)',
+                borderBottom: '1px solid var(--border-base)',
               }}
             >
-              <h2 style={{ fontSize: 18, fontWeight: 700, margin: 0 }}>
+              <h2 style={{ fontSize: 18, fontWeight: 700, margin: 0, fontFamily: 'var(--font-heading)', color: 'var(--text-primary)' }}>
                 Edit Account #{editingAccount.accountId}
               </h2>
               <button
@@ -463,7 +464,7 @@ export default function AccountList() {
 
             <form onSubmit={handleSaveEdit} style={{ padding: 24, display: 'flex', flexDirection: 'column', gap: 16 }}>
               <div>
-                <label style={{ display: 'block', fontSize: 13, fontWeight: 600, marginBottom: 6 }}>
+                <label style={{ display: 'block', fontSize: 13, fontWeight: 600, marginBottom: 6, color: 'var(--text-primary)' }}>
                   Email Address (Immutable)
                 </label>
                 <input
@@ -474,8 +475,8 @@ export default function AccountList() {
                     width: '100%',
                     padding: '10px 12px',
                     borderRadius: 8,
-                    border: '1px solid var(--border-color, #d1d5db)',
-                    backgroundColor: 'var(--hover-bg, #f3f4f6)',
+                    border: '1px solid var(--border-base)',
+                    backgroundColor: 'var(--bg-secondary)',
                     color: 'var(--text-secondary)',
                     fontSize: 14,
                   }}
@@ -483,7 +484,7 @@ export default function AccountList() {
               </div>
 
               <div>
-                <label style={{ display: 'block', fontSize: 13, fontWeight: 600, marginBottom: 6 }}>
+                <label style={{ display: 'block', fontSize: 13, fontWeight: 600, marginBottom: 6, color: 'var(--text-primary)' }}>
                   Full Name *
                 </label>
                 <input
@@ -495,17 +496,17 @@ export default function AccountList() {
                     width: '100%',
                     padding: '10px 12px',
                     borderRadius: 8,
-                    border: '1px solid var(--border-color, #d1d5db)',
+                    border: '1px solid var(--border-base)',
                     fontSize: 14,
                     outline: 'none',
-                    backgroundColor: 'var(--input-bg, #ffffff)',
+                    backgroundColor: 'var(--bg-input)',
                     color: 'var(--text-primary)',
                   }}
                 />
               </div>
 
               <div>
-                <label style={{ display: 'block', fontSize: 13, fontWeight: 600, marginBottom: 6 }}>
+                <label style={{ display: 'block', fontSize: 13, fontWeight: 600, marginBottom: 6, color: 'var(--text-primary)' }}>
                   System Role *
                 </label>
                 <select
@@ -515,10 +516,10 @@ export default function AccountList() {
                     width: '100%',
                     padding: '10px 12px',
                     borderRadius: 8,
-                    border: '1px solid var(--border-color, #d1d5db)',
+                    border: '1px solid var(--border-base)',
                     fontSize: 14,
                     outline: 'none',
-                    backgroundColor: 'var(--input-bg, #ffffff)',
+                    backgroundColor: 'var(--bg-input)',
                     color: 'var(--text-primary)',
                   }}
                 >
@@ -534,8 +535,9 @@ export default function AccountList() {
                   style={{
                     padding: '10px 16px',
                     borderRadius: 8,
-                    border: '1px solid var(--border-color, #d1d5db)',
-                    background: 'none',
+                    border: '1px solid var(--border-base)',
+                    background: 'var(--bg-secondary)',
+                    color: 'var(--text-secondary)',
                     cursor: 'pointer',
                     fontSize: 13,
                     fontWeight: 600,
@@ -552,7 +554,7 @@ export default function AccountList() {
                     gap: 6,
                     padding: '10px 20px',
                     borderRadius: 8,
-                    background: '#2563EB',
+                    background: 'var(--primary)',
                     color: '#ffffff',
                     border: 'none',
                     cursor: 'pointer',
@@ -574,8 +576,9 @@ export default function AccountList() {
           style={{
             position: 'fixed',
             inset: 0,
-            backgroundColor: 'rgba(0, 0, 0, 0.5)',
-            backdropFilter: 'blur(4px)',
+            backgroundColor: 'var(--bg-modal-backdrop)',
+            backdropFilter: 'blur(8px)',
+            WebkitBackdropFilter: 'blur(8px)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -587,11 +590,11 @@ export default function AccountList() {
             style={{
               width: '100%',
               maxWidth: 480,
-              backgroundColor: 'var(--card-bg, #ffffff)',
-              borderRadius: 16,
-              boxShadow: '0 20px 40px rgba(0,0,0,0.2)',
+              backgroundColor: 'var(--bg-card)',
+              borderRadius: 'var(--radius-xl)',
+              boxShadow: 'var(--shadow-xl)',
               overflow: 'hidden',
-              border: '1px solid var(--border-color, #e5e7eb)',
+              border: '1px solid var(--border-base)',
               padding: 28,
               textAlign: 'center',
             }}
@@ -612,7 +615,7 @@ export default function AccountList() {
               <AlertTriangle size={28} />
             </div>
 
-            <h3 style={{ fontSize: 20, fontWeight: 700, margin: '0 0 8px 0' }}>
+            <h3 style={{ fontSize: 20, fontWeight: 700, margin: '0 0 8px 0', fontFamily: 'var(--font-heading)', color: 'var(--text-primary)' }}>
               Confirm Account Deletion
             </h3>
 
@@ -628,7 +631,7 @@ export default function AccountList() {
                 borderRadius: 8,
                 padding: '10px 14px',
                 fontSize: 12,
-                color: '#B45309',
+                color: '#f59e0b',
                 textAlign: 'left',
                 marginBottom: 20,
               }}
@@ -644,7 +647,7 @@ export default function AccountList() {
                   borderRadius: 8,
                   padding: '10px 14px',
                   fontSize: 13,
-                  color: '#DC2626',
+                  color: '#EF4444',
                   textAlign: 'left',
                   marginBottom: 20,
                 }}
@@ -656,12 +659,16 @@ export default function AccountList() {
             <div style={{ display: 'flex', justifyContent: 'center', gap: 12 }}>
               <button
                 type="button"
-                onClick={() => setDeletingAccount(null)}
+                onClick={() => {
+                  setDeletingAccount(null);
+                  setDeleteError(null);
+                }}
                 style={{
-                  padding: '10px 20px',
+                  padding: '10px 18px',
                   borderRadius: 8,
-                  border: '1px solid var(--border-color, #d1d5db)',
-                  background: 'none',
+                  border: '1px solid var(--border-base)',
+                  background: 'var(--bg-secondary)',
+                  color: 'var(--text-secondary)',
                   cursor: 'pointer',
                   fontSize: 13,
                   fontWeight: 600,
@@ -679,7 +686,7 @@ export default function AccountList() {
                   gap: 6,
                   padding: '10px 20px',
                   borderRadius: 8,
-                  backgroundColor: '#EF4444',
+                  backgroundColor: 'var(--accent-rose)',
                   color: '#ffffff',
                   border: 'none',
                   cursor: 'pointer',
@@ -687,7 +694,7 @@ export default function AccountList() {
                   fontWeight: 600,
                 }}
               >
-                {isDeleting ? 'Deleting...' : 'Confirm Delete'}
+                {isDeleting ? 'Deleting...' : 'Delete Account'}
               </button>
             </div>
           </div>

@@ -148,7 +148,7 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  background: #4f46e5;
+  background: var(--primary);
   color: #ffffff;
   border: none;
   border-radius: var(--radius-md);
@@ -156,12 +156,14 @@
   font-size: 0.8125rem;
   font-weight: 600;
   cursor: pointer;
-  transition: background-color var(--transition-fast);
-  box-shadow: 0 1px 2px rgba(79, 70, 229, 0.25);
+  transition: all var(--transition-fast);
+  box-shadow: 0 2px 8px var(--primary-glow);
 }
 
 .btn-create-task:hover {
-  background: #4338ca;
+  background: var(--primary-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px var(--primary-glow);
 }
 
 /* ==================== KANBAN BOARD GRID ==================== */

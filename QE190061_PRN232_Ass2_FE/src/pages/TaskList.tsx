@@ -325,7 +325,7 @@ export default function TaskList() {
               <Link to="/admin" style={{ color: 'var(--primary)', textDecoration: 'none', fontWeight: 600 }}>Admin Hub</Link>
               <span>/</span>
               <span style={{ fontWeight: 600, color: 'var(--text-primary)' }}>Task Management</span>
-              <span style={{ fontSize: 11, fontWeight: 700, padding: '2px 8px', borderRadius: 9999, background: 'rgba(37, 99, 235, 0.12)', color: '#2563eb', marginLeft: 4 }}>
+              <span style={{ fontSize: 11, fontWeight: 700, padding: '2px 8px', borderRadius: 9999, background: 'var(--primary-subtle)', color: 'var(--primary)', marginLeft: 4 }}>
                 🔒 PROTECTED WORKSPACE
               </span>
             </>
@@ -370,10 +370,10 @@ export default function TaskList() {
           fontSize: '0.875rem'
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, color: 'var(--text-secondary)' }}>
-            <Eye size={16} color="#2563eb" />
+            <Eye size={16} color="var(--primary)" />
             <span>You are viewing tasks in <strong>Public Read-Only Mode</strong>. Sign in as Staff or Admin to create, update, reassign, or delete work items.</span>
           </div>
-          <Link to="/login?redirect=/admin/tasks" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontWeight: 700, color: '#2563eb', textDecoration: 'none' }}>
+          <Link to="/login?redirect=/admin/tasks" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontWeight: 700, color: 'var(--primary)', textDecoration: 'none' }}>
             <span>Sign In to Unlock Management</span> <ArrowRight size={14} />
           </Link>
         </div>
@@ -538,7 +538,7 @@ export default function TaskList() {
             <Link
               to="/login?redirect=/admin/tasks"
               className="btn-create-task"
-              style={{ background: '#2563EB', textDecoration: 'none' }}
+              style={{ textDecoration: 'none' }}
               title="Sign in to create tasks"
             >
               <LogIn size={15} />

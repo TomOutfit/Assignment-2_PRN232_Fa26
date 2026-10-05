@@ -11,24 +11,28 @@
   flex-wrap: wrap;
   gap: 20px;
   padding: 28px 32px;
-  background: linear-gradient(135deg, rgba(37, 99, 235, 0.08), rgba(99, 102, 241, 0.08));
-  border: 1px solid var(--border-color, rgba(229, 231, 235, 0.8));
-  border-radius: 20px;
-  backdrop-filter: blur(12px);
+  background: linear-gradient(135deg, rgba(79, 70, 229, 0.08), rgba(37, 99, 235, 0.06));
+  border: 1px solid var(--border-glow);
+  border-radius: var(--radius-xl);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: var(--shadow-sm);
 }
 
 .admin-hero-content h1 {
-  font-size: 28px;
+  font-family: var(--font-heading);
+  font-size: 1.75rem;
   font-weight: 800;
-  color: var(--text-primary, #111827);
-  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  letter-spacing: -0.025em;
   margin: 0 0 8px 0;
 }
 
 .admin-hero-content p {
-  color: var(--text-secondary, #6b7280);
-  font-size: 15px;
+  color: var(--text-secondary);
+  font-size: 0.9375rem;
   margin: 0;
+  line-height: 1.5;
 }
 
 .admin-user-pill {
@@ -36,10 +40,10 @@
   align-items: center;
   gap: 12px;
   padding: 10px 18px;
-  background: var(--card-bg, #ffffff);
-  border: 1px solid var(--border-color, #e5e7eb);
-  border-radius: 9999px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+  background: var(--bg-card);
+  border: 1px solid var(--border-base);
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-xs);
 }
 
 .admin-user-avatar {
@@ -63,7 +67,7 @@
 .admin-user-name {
   font-size: 14px;
   font-weight: 700;
-  color: var(--text-primary, #111827);
+  color: var(--text-primary);
 }
 
 .admin-role-badge {
@@ -79,7 +83,7 @@
 
 .admin-role-badge.admin {
   background: rgba(239, 68, 68, 0.12);
-  color: #dc2626;
+  color: #ef4444;
 }
 
 .admin-role-badge.staff {
@@ -96,20 +100,23 @@
 
 .admin-kpi-card {
   padding: 24px;
-  border-radius: 16px;
-  background: var(--card-bg, #ffffff);
-  border: 1px solid var(--border-color, #e5e7eb);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+  border-radius: var(--radius-xl);
+  background: var(--bg-card);
+  border: 1px solid var(--border-base);
+  box-shadow: var(--shadow-sm);
   display: flex;
   flex-direction: column;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: all var(--transition-base);
   text-decoration: none;
   color: inherit;
+  position: relative;
+  overflow: hidden;
 }
 
 .admin-kpi-card:hover {
   transform: translateY(-3px);
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
+  border-color: var(--primary);
+  box-shadow: var(--shadow-lg), 0 0 20px var(--primary-subtle);
 }
 
 .admin-kpi-top {
@@ -122,16 +129,16 @@
 .admin-kpi-icon {
   width: 44px;
   height: 44px;
-  border-radius: 12px;
+  border-radius: var(--radius-md);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .admin-kpi-value {
-  font-size: 32px;
+  font-size: 2rem;
   font-weight: 800;
-  color: var(--text-primary, #111827);
+  color: var(--text-primary);
   line-height: 1;
   margin-bottom: 6px;
 }
@@ -139,14 +146,15 @@
 .admin-kpi-label {
   font-size: 13px;
   font-weight: 600;
-  color: var(--text-secondary, #6b7280);
+  color: var(--text-secondary);
 }
 
 /* Section Title */
 .admin-section-title {
-  font-size: 18px;
+  font-family: var(--font-heading);
+  font-size: 1.125rem;
   font-weight: 700;
-  color: var(--text-primary, #111827);
+  color: var(--text-primary);
   margin-bottom: 16px;
   display: flex;
   align-items: center;
@@ -164,21 +172,21 @@
   display: flex;
   flex-direction: column;
   padding: 24px;
-  border-radius: 16px;
-  background: var(--card-bg, #ffffff);
-  border: 1px solid var(--border-color, #e5e7eb);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+  border-radius: var(--radius-xl);
+  background: var(--bg-card);
+  border: 1px solid var(--border-base);
+  box-shadow: var(--shadow-sm);
   text-decoration: none;
   color: inherit;
-  transition: all 0.2s ease;
+  transition: all var(--transition-base);
   position: relative;
   overflow: hidden;
 }
 
 .admin-portal-card:hover {
-  transform: translateY(-2px);
-  border-color: #3b82f6;
-  box-shadow: 0 12px 28px rgba(59, 130, 246, 0.1);
+  transform: translateY(-3px);
+  border-color: var(--primary);
+  box-shadow: var(--shadow-lg), 0 0 20px var(--primary-subtle);
 }
 
 .admin-portal-header {
@@ -199,24 +207,30 @@
 }
 
 .admin-portal-title {
-  font-size: 16px;
+  font-family: var(--font-heading);
+  font-size: 1rem;
   font-weight: 700;
-  color: var(--text-primary, #111827);
+  color: var(--text-primary);
 }
 
 .admin-portal-desc {
-  font-size: 13px;
-  color: var(--text-secondary, #6b7280);
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
   line-height: 1.5;
   margin-bottom: 16px;
   flex: 1;
 }
 
 .admin-portal-action {
-  font-size: 13px;
+  font-size: 0.8125rem;
   font-weight: 600;
-  color: #2563eb;
+  color: var(--primary);
   display: flex;
   align-items: center;
   gap: 6px;
+  transition: transform var(--transition-fast);
+}
+
+.admin-portal-card:hover .admin-portal-action {
+  transform: translateX(3px);
 }

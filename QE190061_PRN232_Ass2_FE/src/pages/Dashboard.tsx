@@ -117,10 +117,10 @@ export default function Dashboard() {
                 padding: '3px 10px',
                 borderRadius: 9999,
                 background: 'rgba(37, 99, 235, 0.12)',
-                color: '#2563eb',
                 fontSize: 12,
                 fontWeight: 700,
                 marginBottom: 8,
+                color: 'var(--primary)',
               }}
             >
               <Sparkles size={14} /> PRN232 Assignment 2 • Role-Based Authentication
@@ -191,8 +191,8 @@ export default function Dashboard() {
                 gap: 6,
                 padding: '3px 10px',
                 borderRadius: 9999,
-                background: isAdmin ? 'rgba(239, 68, 68, 0.12)' : 'rgba(37, 99, 235, 0.12)',
-                color: isAdmin ? '#ef4444' : '#2563eb',
+                background: isAdmin ? 'rgba(239, 68, 68, 0.12)' : 'var(--primary-subtle)',
+                color: isAdmin ? 'var(--accent-rose)' : 'var(--primary)',
                 fontSize: 12,
                 fontWeight: 700,
                 marginBottom: 6,
@@ -221,7 +221,7 @@ export default function Dashboard() {
                 display: 'inline-flex',
                 alignItems: 'center',
                 gap: 8,
-                background: isAdmin ? '#ef4444' : '#2563eb',
+                background: isAdmin ? 'var(--accent-rose)' : 'var(--primary)',
               }}
             >
               <Shield size={16} /> Enter Admin Hub
@@ -384,7 +384,7 @@ export default function Dashboard() {
                         className="progress-fill"
                         style={{
                           width: `${projPct}%`,
-                          background: projPct === 100 ? '#10b981' : 'linear-gradient(90deg, var(--primary) 0%, var(--accent-purple) 100%)',
+                          background: projPct === 100 ? 'var(--accent-emerald)' : 'linear-gradient(90deg, var(--primary) 0%, var(--accent-purple) 100%)',
                         }}
                       />
                     </div>
@@ -478,23 +478,23 @@ export default function Dashboard() {
 
               <div className="donut-legend">
                 <div className="legend-row">
-                  <span className="legend-dot" style={{ background: '#10b981' }} />
+                  <span className="legend-dot" style={{ background: 'var(--accent-emerald)' }} />
                   <span className="legend-name">Done</span>
                   <span className="legend-count">{completedTasks}</span>
                 </div>
                 <div className="legend-row">
-                  <span className="legend-dot" style={{ background: '#3b82f6' }} />
+                  <span className="legend-dot" style={{ background: 'var(--accent-blue)' }} />
                   <span className="legend-name">In Progress</span>
                   <span className="legend-count">{inProgressTasks}</span>
                 </div>
                 <div className="legend-row">
-                  <span className="legend-dot" style={{ background: '#64748b' }} />
+                  <span className="legend-dot" style={{ background: 'var(--status-todo)' }} />
                   <span className="legend-name">To Do</span>
                   <span className="legend-count">{todoTasks}</span>
                 </div>
                 {cancelledTasks > 0 && (
                   <div className="legend-row">
-                    <span className="legend-dot" style={{ background: '#ef4444' }} />
+                    <span className="legend-dot" style={{ background: 'var(--accent-rose)' }} />
                     <span className="legend-name">Cancelled</span>
                     <span className="legend-count">{cancelledTasks}</span>
                   </div>
@@ -525,7 +525,7 @@ export default function Dashboard() {
                   className="progress-fill"
                   style={{
                     width: `${totalTasks ? (criticalPriority / totalTasks) * 100 : 0}%`,
-                    background: '#ef4444',
+                    background: 'var(--priority-critical)',
                   }}
                 />
               </div>
@@ -541,7 +541,7 @@ export default function Dashboard() {
                   className="progress-fill"
                   style={{
                     width: `${totalTasks ? (highPriority / totalTasks) * 100 : 0}%`,
-                    background: '#f97316',
+                    background: 'var(--priority-high)',
                   }}
                 />
               </div>
@@ -557,7 +557,7 @@ export default function Dashboard() {
                   className="progress-fill"
                   style={{
                     width: `${totalTasks ? (medPriority / totalTasks) * 100 : 0}%`,
-                    background: '#f59e0b',
+                    background: 'var(--priority-medium)',
                   }}
                 />
               </div>
@@ -573,7 +573,7 @@ export default function Dashboard() {
                   className="progress-fill"
                   style={{
                     width: `${totalTasks ? (lowPriority / totalTasks) * 100 : 0}%`,
-                    background: '#10b981',
+                    background: 'var(--priority-low)',
                   }}
                 />
               </div>
@@ -604,7 +604,7 @@ export default function Dashboard() {
             </div>
           ) : upcomingTasks.length === 0 ? (
             <div className="empty-mini-state">
-              <CheckCircle2 size={24} color="#10b981" />
+              <CheckCircle2 size={24} color="var(--accent-emerald)" />
               <span>No pending upcoming tasks! All clear.</span>
             </div>
           ) : (
