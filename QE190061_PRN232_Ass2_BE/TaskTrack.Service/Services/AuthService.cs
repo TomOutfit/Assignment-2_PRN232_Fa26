@@ -101,7 +101,7 @@ public class AuthService : IAuthService
             Email = account.Email,
             Role = account.Role,
             CreatedDate = account.CreatedDate,
-            CreatedTasksCount = account.CreatedTasks.Count
+            CreatedTasksCount = account.CreatedTasks?.Count ?? 0
         };
     }
 }

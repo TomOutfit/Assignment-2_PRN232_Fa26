@@ -15,6 +15,7 @@ public class AccountRepository : IAccountRepository
     public async System.Threading.Tasks.Task<IEnumerable<SystemAccount>> GetAllAsync()
     {
         return await _context.SystemAccounts
+            .Include(a => a.CreatedTasks)
             .OrderBy(a => a.AccountId)
             .ToListAsync();
     }
@@ -22,6 +23,7 @@ public class AccountRepository : IAccountRepository
     public async System.Threading.Tasks.Task<SystemAccount?> GetByIdAsync(int id)
     {
         return await _context.SystemAccounts
+            .Include(a => a.CreatedTasks)
             .FirstOrDefaultAsync(a => a.AccountId == id);
     }
 
@@ -52,6 +54,6 @@ public class AccountRepository : IAccountRepository
 
     public async System.Threading.Tasks.Task<bool> HasCreatedTasksAsync(int accountId)
     {
-        return await _context.Tasks.AnyAsync(t => t.CreatedById == accountId && t.IsActive);
+        return await _context.Tasks.AnyAsync(t => t.CreatedById == accountId);
     }
 }

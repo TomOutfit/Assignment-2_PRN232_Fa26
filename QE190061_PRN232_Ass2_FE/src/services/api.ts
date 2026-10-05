@@ -41,12 +41,15 @@ api.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response && error.response.status === 401) {
-      // Token expired or invalid
-      const currentPath = window.location.pathname;
-      if (currentPath.startsWith('/admin')) {
+      const isLoginRequest = error.config?.url?.includes('/auth/login');
+      if (!isLoginRequest) {
+        // Token expired or invalid: clear session and redirect to login
         localStorage.removeItem('token');
         localStorage.removeItem('user');
-        window.location.href = `/login?redirect=${encodeURIComponent(currentPath)}`;
+        const currentPath = window.location.pathname;
+        if (!currentPath.includes('/login')) {
+          window.location.href = `/login?redirect=${encodeURIComponent(currentPath)}`;
+        }
       }
     }
     return Promise.reject(error);
