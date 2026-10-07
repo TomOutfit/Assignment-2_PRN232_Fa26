@@ -1,17 +1,28 @@
-import { test, expect, request as apiRequest } from '@playwright/test';
+import { test, expect, request as apiRequest, type APIRequestContext } from '@playwright/test';
 import { CONFIG } from '../../config';
 import { createTracker, runCleanup } from '../../helpers/cleanup';
 import type { Department } from '../../helpers/types';
 
 test.describe('Backend API — Departments', () => {
   const base = CONFIG.BACKEND_URL;
-  let api: Awaited<ReturnType<typeof apiRequest>>;
+  let api: APIRequestContext;
   const tracker = createTracker();
 
   test.beforeAll(async () => {
+    const tempApi = await apiRequest.newContext({ baseURL: base, timeout: CONFIG.API_TIMEOUT_MS });
+    const loginRes = await tempApi.post('/api/auth/login', {
+      data: { email: CONFIG.STAFF_EMAIL, password: CONFIG.STAFF_PASSWORD }
+    });
+    const authData = await loginRes.json();
+    const token = authData.token || authData.accessToken;
+    await tempApi.dispose();
+
     api = await apiRequest.newContext({
       baseURL: base,
-      extraHTTPHeaders: { 'Content-Type': 'application/json' },
+      extraHTTPHeaders: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
       timeout: CONFIG.API_TIMEOUT_MS,
     });
   });

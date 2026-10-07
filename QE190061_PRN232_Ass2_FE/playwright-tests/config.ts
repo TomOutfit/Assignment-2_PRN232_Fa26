@@ -5,9 +5,13 @@
 
 export const CONFIG = {
   // Live URLs
-  FRONTEND_URL: 'https://qe190061-prn232-ass1-fe.vercel.app',
-  BACKEND_URL: 'https://qe190061-prn232-ass1-be.onrender.com',
-  SWAGGER_URL: 'https://qe190061-prn232-ass1-be.onrender.com/swagger/index.html',
+  FRONTEND_URL: process.env.FRONTEND_URL || 'https://qe190061-prn232-ass2-fe.vercel.app',
+  BACKEND_URL: process.env.BACKEND_URL || 'https://qe190061-prn232-ass2-be.onrender.com',
+  SWAGGER_URL: `${process.env.BACKEND_URL || 'https://qe190061-prn232-ass2-be.onrender.com'}/swagger/index.html`,
+  ADMIN_EMAIL: process.env.ADMIN_EMAIL || 'admin@tasktrack.com',
+  ADMIN_PASSWORD: process.env.ADMIN_PASSWORD || 'Admin@123456',
+  STAFF_EMAIL: process.env.STAFF_EMAIL || 'staff@tasktrack.com',
+  STAFF_PASSWORD: process.env.STAFF_PASSWORD || 'Staff@123456',
 
   // Render free tier can be slow on first cold start
   NAV_TIMEOUT_MS: 90_000,

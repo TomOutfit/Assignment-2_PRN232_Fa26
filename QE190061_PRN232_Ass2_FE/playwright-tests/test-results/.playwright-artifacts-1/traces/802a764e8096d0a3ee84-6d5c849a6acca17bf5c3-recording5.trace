@@ -1,0 +1,22 @@
+{"version":9,"type":"context-options","origin":"library","browserName":"","playwrightVersion":"1.63.0","options":{},"platform":"win32","wallTime":1791376677950,"monotonicTime":38270.564,"sdkLanguage":"javascript","title":"ui\\management.spec.ts:134 › Frontend UI — Management pages CRUD › Department Management: delete is blocked with friendly message when projects are linked"}
+{"type":"before","callId":"call@97","startTime":40503.309,"class":"APIRequestContext","method":"fetch","params":{"url":"/api/departments/1","method":"GET","timeout":60000},"stepId":"pw:api@40"}
+{"type":"log","callId":"call@97","time":40504.867,"message":"→ GET https://qe190061-prn232-ass2-be.onrender.com/api/departments/1"}
+{"type":"log","callId":"call@97","time":40504.896,"message":"  user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36"}
+{"type":"log","callId":"call@97","time":40504.901,"message":"  accept: */*"}
+{"type":"log","callId":"call@97","time":40504.904,"message":"  accept-encoding: gzip,deflate,br"}
+{"type":"log","callId":"call@97","time":40504.909,"message":"  Content-Type: application/json"}
+{"type":"log","callId":"call@97","time":40504.912,"message":"  Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIyIiwiQWNjb3VudElEIjoiMiIsImVtYWlsIjoic3RhZmZAdGFza3RyYWNrLmNvbSIsIkVtYWlsIjoic3RhZmZAdGFza3RyYWNrLmNvbSIsInVuaXF1ZV9uYW1lIjoiU2FyYWggSmVua2lucyAoTGVhZCBTdGFmZikiLCJGdWxsTmFtZSI6IlNhcmFoIEplbmtpbnMgKExlYWQgU3RhZmYpIiwicm9sZSI6IlN0YWZmIiwiUm9sZSI6IjAiLCJSb2xlTmFtZSI6IlN0YWZmIiwianRpIjoiNTdmOWQ4OGUtYmMwZC00NTEwLTlhYTktMTU3MmZiNDA2OGFmIiwibmJmIjoxNzkxMzc2NzAwLCJleHAiOjE3OTE0NjMxMDAsImlhdCI6MTc5MTM3NjcwMCwiaXNzIjoiVGFza1RyYWNrQVBJIiwiYXVkIjoiVGFza1RyYWNrQ2xpZW50In0.CxwZwIRRLMPstviuX8e6OF2ctqOcmOxqCDBYO1HNS_I"}
+{"type":"log","callId":"call@97","time":40759.918,"message":"← 200 OK"}
+{"type":"log","callId":"call@97","time":40759.937,"message":"  date: Wed, 07 Oct 2026 12:38:25 GMT"}
+{"type":"log","callId":"call@97","time":40759.94,"message":"  content-type: application/json; charset=utf-8"}
+{"type":"log","callId":"call@97","time":40759.944,"message":"  transfer-encoding: chunked"}
+{"type":"log","callId":"call@97","time":40759.947,"message":"  connection: keep-alive"}
+{"type":"log","callId":"call@97","time":40759.964,"message":"  content-encoding: br"}
+{"type":"log","callId":"call@97","time":40759.968,"message":"  rndr-id: 932150d9-fc5e-4ae2"}
+{"type":"log","callId":"call@97","time":40759.97,"message":"  server: cloudflare"}
+{"type":"log","callId":"call@97","time":40759.973,"message":"  vary: Accept-Encoding"}
+{"type":"log","callId":"call@97","time":40759.976,"message":"  x-render-origin-server: Kestrel"}
+{"type":"log","callId":"call@97","time":40759.978,"message":"  cf-cache-status: DYNAMIC"}
+{"type":"log","callId":"call@97","time":40759.999,"message":"  cf-ray: a46cf676fd4545df-SIN"}
+{"type":"log","callId":"call@97","time":40760.002,"message":"  alt-svc: h3=\":443\"; ma=86400"}
+{"type":"after","callId":"call@97","endTime":40761.801,"result":{"response":{"url":"https://qe190061-prn232-ass2-be.onrender.com/api/departments/1","status":200,"statusText":"OK","headers":[{"name":"Date","value":"Wed, 07 Oct 2026 12:38:25 GMT"},{"name":"Content-Type","value":"application/json; charset=utf-8"},{"name":"Transfer-Encoding","value":"chunked"},{"name":"Connection","value":"keep-alive"},{"name":"Content-Encoding","value":"br"},{"name":"rndr-id","value":"932150d9-fc5e-4ae2"},{"name":"Server","value":"cloudflare"},{"name":"vary","value":"Accept-Encoding"},{"name":"x-render-origin-server","value":"Kestrel"},{"name":"cf-cache-status","value":"DYNAMIC"},{"name":"CF-RAY","value":"a46cf676fd4545df-SIN"},{"name":"alt-svc","value":"h3=\":443\"; ma=86400"}],"securityDetails":{"protocol":"TLSv1.3","subjectName":"onrender.com","validFrom":1790028271,"validTo":1797807868,"issuer":"WE1"},"serverAddr":{"ipAddress":"216.24.57.16","port":443},"timing":{"startTime":1791376680183,"domainLookupStart":0,"domainLookupEnd":29.019000000000233,"connectStart":29.019000000000233,"secureConnectionStart":85.03300000000309,"connectEnd":144.9340000000011,"requestStart":144.9340000000011,"responseStart":255.55599999999686},"responseEndTiming":257.5109999999986,"fetchUid":"8f6238039c77abda53d79308f9c02820"}}}
