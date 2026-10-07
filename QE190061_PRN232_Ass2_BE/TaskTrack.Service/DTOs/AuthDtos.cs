@@ -38,3 +38,13 @@ public class AuthResponseDto
     public string RoleName => Role == 1 ? "Admin" : "Staff";
     public DateTime Expiration { get; set; }
 }
+
+public class UpdateProfileDto
+{
+    [Required(ErrorMessage = "Full Name is required.")]
+    [MaxLength(100, ErrorMessage = "Full Name cannot exceed 100 characters.")]
+    public string FullName { get; set; } = string.Empty;
+
+    [MinLength(6, ErrorMessage = "New Password must be at least 6 characters.")]
+    public string? NewPassword { get; set; }
+}

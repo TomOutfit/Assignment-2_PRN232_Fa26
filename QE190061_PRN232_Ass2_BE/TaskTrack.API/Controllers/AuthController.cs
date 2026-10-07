@@ -76,4 +76,29 @@ public class AuthController : ControllerBase
 
         return Ok(profile);
     }
+
+    /// <summary>
+    /// Update current logged-in user profile / password (Bonus Feature)
+    /// </summary>
+    [HttpPut("profile")]
+    [Authorize]
+    public async Task<ActionResult<AccountDto>> UpdateCurrentProfile([FromBody] UpdateProfileDto dto)
+    {
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
+
+        var idClaim = User.FindFirstValue(ClaimTypes.NameIdentifier) ?? User.FindFirstValue("AccountID");
+        if (!int.TryParse(idClaim, out var accountId))
+        {
+            return Unauthorized(new { message = "Invalid token payload." });
+        }
+
+        var (success, errorMessage, account) = await _authService.UpdateProfileAsync(accountId, dto);
+        if (!success)
+        {
+            return BadRequest(new { message = errorMessage });
+        }
+
+        return Ok(account);
+    }
 }

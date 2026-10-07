@@ -104,4 +104,34 @@ public class AuthService : IAuthService
             CreatedTasksCount = account.CreatedTasks?.Count ?? 0
         };
     }
+
+    public async Task<(bool Success, string? ErrorMessage, AccountDto? Account)> UpdateProfileAsync(int accountId, UpdateProfileDto dto)
+    {
+        var account = await _accountRepository.GetByIdAsync(accountId);
+        if (account == null)
+            return (false, "Account not found.", null);
+
+        if (!string.IsNullOrWhiteSpace(dto.FullName))
+        {
+            account.FullName = dto.FullName.Trim();
+        }
+
+        if (!string.IsNullOrWhiteSpace(dto.NewPassword))
+        {
+            account.PasswordHash = BCrypt.Net.BCrypt.HashPassword(dto.NewPassword);
+        }
+
+        await _accountRepository.UpdateAsync(account);
+        var accountDto = new AccountDto
+        {
+            AccountId = account.AccountId,
+            FullName = account.FullName,
+            Email = account.Email,
+            Role = account.Role,
+            CreatedDate = account.CreatedDate,
+            CreatedTasksCount = account.CreatedTasks?.Count ?? 0
+        };
+
+        return (true, null, accountDto);
+    }
 }
