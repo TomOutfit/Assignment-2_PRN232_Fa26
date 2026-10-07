@@ -150,8 +150,8 @@ export default function PublicProjects() {
                       <h3 className="sub-card-title">{proj.projectName}</h3>
                     </div>
                     <Badge
-                      label={proj.statusName || (proj.status === 2 ? 'Done' : 'Active')}
-                      variant={proj.status === 2 ? 'success' : 'info'}
+                      label={proj.statusName || { 0: 'Not Started', 1: 'In Progress', 2: 'Completed', 3: 'On Hold' }[proj.status] || 'Active'}
+                      variant={proj.status === 2 ? 'success' : proj.status === 1 ? 'info' : 'neutral'}
                       size="sm"
                     />
                   </div>
