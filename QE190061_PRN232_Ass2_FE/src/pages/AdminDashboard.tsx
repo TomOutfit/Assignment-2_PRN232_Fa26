@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { departmentApi, projectApi, taskApi, tagApi, accountApi } from '../services/api';
+import { Skeleton } from '../components/ui/Skeleton';
 import {
   Building2,
   FolderGit2,
@@ -11,9 +12,9 @@ import {
   ArrowRight,
   ShieldCheck,
   UserCheck,
-  ChevronRight,
   Activity,
   PlusCircle,
+  ChevronRight,
 } from 'lucide-react';
 import './AdminDashboard.css';
 
@@ -107,7 +108,7 @@ export default function AdminDashboard() {
                 <Building2 size={22} />
               </div>
             </div>
-            <div className="admin-kpi-value">{loading ? '...' : deptCount}</div>
+            <div className="admin-kpi-value">{loading ? <Skeleton width="44px" height="28px" borderRadius="6px" /> : deptCount}</div>
             <span style={{ fontSize: 12, color: 'var(--text-secondary)' }}>Active enterprise units</span>
           </Link>
 
@@ -118,7 +119,7 @@ export default function AdminDashboard() {
                 <FolderGit2 size={22} />
               </div>
             </div>
-            <div className="admin-kpi-value">{loading ? '...' : projCount}</div>
+            <div className="admin-kpi-value">{loading ? <Skeleton width="44px" height="28px" borderRadius="6px" /> : projCount}</div>
             <span style={{ fontSize: 12, color: 'var(--text-secondary)' }}>Across all departments</span>
           </Link>
 
@@ -129,7 +130,7 @@ export default function AdminDashboard() {
                 <CheckSquare size={22} />
               </div>
             </div>
-            <div className="admin-kpi-value">{loading ? '...' : taskCount}</div>
+            <div className="admin-kpi-value">{loading ? <Skeleton width="44px" height="28px" borderRadius="6px" /> : taskCount}</div>
             <span style={{ fontSize: 12, color: 'var(--text-secondary)' }}>Tracked work items</span>
           </Link>
 
@@ -140,7 +141,7 @@ export default function AdminDashboard() {
                 <Tags size={22} />
               </div>
             </div>
-            <div className="admin-kpi-value">{loading ? '...' : tagCount}</div>
+            <div className="admin-kpi-value">{loading ? <Skeleton width="44px" height="28px" borderRadius="6px" /> : tagCount}</div>
             <span style={{ fontSize: 12, color: 'var(--text-secondary)' }}>Classification taxonomy</span>
           </Link>
 
@@ -152,7 +153,7 @@ export default function AdminDashboard() {
                   <Users size={22} />
                 </div>
               </div>
-              <div className="admin-kpi-value">{loading ? '...' : accountCount}</div>
+              <div className="admin-kpi-value">{loading ? <Skeleton width="44px" height="28px" borderRadius="6px" /> : accountCount}</div>
               <span style={{ fontSize: 12, color: '#ef4444', fontWeight: 600 }}>Admin Only Access</span>
             </Link>
           )}

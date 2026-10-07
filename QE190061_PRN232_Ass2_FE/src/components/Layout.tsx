@@ -20,7 +20,6 @@ import {
   ShieldCheck,
   UserCheck,
   LogIn,
-  UserPlus,
   LogOut,
   FolderLock,
   Lock,
@@ -273,41 +272,38 @@ export default function Layout({ children }: LayoutProps) {
             </div>
           ) : (
             !collapsed && (
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 8, padding: '12px 4px 4px' }}>
+              <div
+                style={{
+                  padding: '10px 12px',
+                  borderRadius: 10,
+                  background: 'var(--bg-secondary)',
+                  border: '1px solid var(--border-subtle)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  gap: 8,
+                }}
+              >
+                <div>
+                  <div style={{ fontSize: 12, fontWeight: 700, color: 'var(--text-primary)' }}>Guest Mode</div>
+                  <div style={{ fontSize: 11, color: 'var(--text-muted)' }}>Read-Only Browsing</div>
+                </div>
                 <Link
                   to="/login"
-                  className="btn btn-primary"
                   style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    gap: 6,
-                    padding: '8px 12px',
-                    borderRadius: 8,
-                    fontSize: 13,
+                    fontSize: 12,
                     fontWeight: 600,
+                    color: '#2563EB',
                     textDecoration: 'none',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: 4,
+                    padding: '4px 8px',
+                    borderRadius: 6,
+                    background: 'rgba(37, 99, 235, 0.1)',
                   }}
                 >
-                  <LogIn size={15} /> Sign In
-                </Link>
-                <Link
-                  to="/register"
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    gap: 6,
-                    padding: '8px 12px',
-                    borderRadius: 8,
-                    fontSize: 13,
-                    fontWeight: 600,
-                    textDecoration: 'none',
-                    color: 'var(--text-primary)',
-                    border: '1px solid var(--border-color)',
-                  }}
-                >
-                  <UserPlus size={15} /> Register Staff
+                  <LogIn size={13} /> Login
                 </Link>
               </div>
             )
@@ -356,16 +352,11 @@ export default function Layout({ children }: LayoutProps) {
               <span className="search-kbd-badge">⌘K</span>
             </div>
 
-            {/* Quick Action: Admin Portal / New Task */}
-            {isAuthenticated ? (
+            {/* Quick Action: Admin Portal */}
+            {isAuthenticated && (
               <Link to="/admin" className="btn-new-project" style={{ background: 'linear-gradient(135deg, #2563EB, #1D4ED8)' }}>
                 <FolderLock size={15} strokeWidth={2.5} />
                 <span>Admin Hub</span>
-              </Link>
-            ) : (
-              <Link to="/login" className="btn-new-project">
-                <LogIn size={15} strokeWidth={2.5} />
-                <span>Sign In</span>
               </Link>
             )}
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Skeleton } from './Skeleton';
 
 interface StatCardProps {
   title: string;
@@ -54,6 +55,7 @@ export const StatCard: React.FC<StatCardProps> = ({
   };
 
   const scheme = schemeStyles[colorScheme] || schemeStyles.primary;
+  const isLoading = value === '...' || value === undefined || value === null;
 
   return (
     <div
@@ -64,7 +66,7 @@ export const StatCard: React.FC<StatCardProps> = ({
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
-        minHeight: '120px',
+        minHeight: '124px',
       }}
     >
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
@@ -72,8 +74,8 @@ export const StatCard: React.FC<StatCardProps> = ({
           <span style={{ fontSize: '0.8125rem', fontWeight: 600, color: 'var(--text-secondary)' }}>
             {title}
           </span>
-          <div style={{ fontSize: '1.875rem', fontWeight: 800, color: 'var(--text-primary)', marginTop: '4px' }}>
-            {value}
+          <div style={{ fontSize: '1.875rem', fontWeight: 800, color: 'var(--text-primary)', marginTop: '4px', minHeight: '38px', display: 'flex', alignItems: 'center' }}>
+            {isLoading ? <Skeleton width="54px" height="32px" borderRadius="6px" /> : value}
           </div>
         </div>
         <div
@@ -87,6 +89,7 @@ export const StatCard: React.FC<StatCardProps> = ({
             alignItems: 'center',
             justifyContent: 'center',
             boxShadow: `0 4px 12px ${scheme.glow}`,
+            flexShrink: 0,
           }}
         >
           {icon}
@@ -94,7 +97,7 @@ export const StatCard: React.FC<StatCardProps> = ({
       </div>
 
       {(subtitle || trend) && (
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '12px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '12px', flexWrap: 'wrap' }}>
           {trend && (
             <span
               style={{
@@ -102,7 +105,7 @@ export const StatCard: React.FC<StatCardProps> = ({
                 fontWeight: 700,
                 color: trend.isPositive ? '#10b981' : '#ef4444',
                 background: trend.isPositive ? 'rgba(16, 185, 129, 0.1)' : 'rgba(239, 68, 68, 0.1)',
-                padding: '2px 6px',
+                padding: '2px 8px',
                 borderRadius: 'var(--radius-xs)',
               }}
             >
@@ -117,3 +120,4 @@ export const StatCard: React.FC<StatCardProps> = ({
     </div>
   );
 };
+
