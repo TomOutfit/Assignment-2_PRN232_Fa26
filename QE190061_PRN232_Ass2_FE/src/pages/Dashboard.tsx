@@ -161,13 +161,15 @@ export default function Dashboard() {
         <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
           {isAuthenticated ? (
             <>
-              <Link to="/admin" className="btn btn-primary" style={{ padding: '10px 18px', fontSize: '0.875rem', fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: 8 }}>
-                {isAdmin ? <Shield size={16} /> : <UserCheck size={16} />}
-                <span>{isAdmin ? 'Enter Admin Hub' : 'Enter Management Hub'}</span>
-              </Link>
-              <Link to="/admin/tasks" className="btn btn-secondary" style={{ padding: '10px 16px', fontSize: '0.875rem', fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: 6 }}>
-                <CheckSquare size={16} /> Task Manager
-              </Link>
+              {isAdmin ? (
+                <Link to="/admin" className="btn btn-primary" style={{ padding: '10px 18px', fontSize: '0.875rem', fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: 8 }}>
+                  <Shield size={16} /> Enter Admin Hub
+                </Link>
+              ) : (
+                <Link to="/admin/tasks" className="btn btn-primary" style={{ padding: '10px 18px', fontSize: '0.875rem', fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: 8 }}>
+                  <CheckSquare size={16} /> Manage Tasks
+                </Link>
+              )}
             </>
           ) : (
             <>

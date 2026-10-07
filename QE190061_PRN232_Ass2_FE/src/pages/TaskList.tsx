@@ -322,8 +322,17 @@ export default function TaskList() {
         <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 13, color: 'var(--text-secondary)' }}>
           {isAdminRoute ? (
             <>
-              <Link to="/admin" style={{ color: 'var(--primary)', textDecoration: 'none', fontWeight: 600 }}>{isAdmin ? 'Admin Hub' : 'Management Hub'}</Link>
-              <span>/</span>
+              {isAdmin ? (
+                <>
+                  <Link to="/admin" style={{ color: 'var(--primary)', textDecoration: 'none', fontWeight: 600 }}>Admin Hub</Link>
+                  <span>/</span>
+                </>
+              ) : (
+                <>
+                  <span style={{ fontWeight: 600, color: 'var(--text-secondary)' }}>Management</span>
+                  <span>/</span>
+                </>
+              )}
               <span style={{ fontWeight: 600, color: 'var(--text-primary)' }}>Task Management</span>
               <span style={{ fontSize: 11, fontWeight: 700, padding: '2px 8px', borderRadius: 9999, background: 'var(--primary-subtle)', color: 'var(--primary)', marginLeft: 4 }}>
                 🔒 PROTECTED WORKSPACE

@@ -65,12 +65,9 @@ export default function AdminDashboard() {
       {/* Hero Welcome Banner */}
       <div className="admin-hero">
         <div className="admin-hero-content">
-          <h1>{isAdmin ? 'Admin Control Hub' : 'Staff Management Hub'}</h1>
+          <h1>Admin Control Hub</h1>
           <p>
-            Welcome, <strong>{user?.fullName}</strong>.{' '}
-            {isAdmin
-              ? 'Manage your enterprise departments, projects, tasks, and system accounts with full administrative control.'
-              : 'Manage your enterprise departments, projects, tasks, and tags with protected staff write access.'}
+            Welcome, <strong>{user?.fullName}</strong>. Manage your enterprise departments, projects, tasks, and system accounts with full administrative control.
           </p>
         </div>
 

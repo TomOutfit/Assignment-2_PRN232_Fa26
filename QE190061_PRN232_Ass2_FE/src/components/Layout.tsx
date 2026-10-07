@@ -21,7 +21,6 @@ import {
   UserCheck,
   LogIn,
   LogOut,
-  FolderLock,
   Lock,
   Eye,
   User,
@@ -75,7 +74,7 @@ export default function Layout({ children }: LayoutProps) {
 
   // Protected Management Navigation items
   const managementNavItems = [
-    { path: '/admin', label: isAdmin ? 'Admin Hub' : 'Management Hub', icon: isAdmin ? Shield : CheckSquare, exact: true, adminOnly: false },
+    ...(isAdmin ? [{ path: '/admin', label: 'Admin Hub', icon: Shield, exact: true, adminOnly: true }] : []),
     { path: '/admin/departments', label: 'Manage Departments', icon: Users, exact: false, adminOnly: false },
     { path: '/admin/projects', label: 'Manage Projects', icon: FolderKanban, exact: false, adminOnly: false },
     { path: '/admin/tasks', label: 'Manage Tasks', icon: CheckSquare, exact: false, adminOnly: false },
@@ -355,10 +354,10 @@ export default function Layout({ children }: LayoutProps) {
               <span className="search-kbd-badge">⌘K</span>
             </div>
 
-            {/* Quick Action: Management Hub / Admin Portal */}
+            {/* Quick Action: Admin Portal / Task Manager */}
             {isAuthenticated && (
               <Link
-                to="/admin"
+                to={isAdmin ? '/admin' : '/admin/tasks'}
                 className="btn-new-project"
                 style={{
                   background: isAdmin
@@ -366,8 +365,8 @@ export default function Layout({ children }: LayoutProps) {
                     : 'linear-gradient(135deg, #2563eb, #1d4ed8)',
                 }}
               >
-                {isAdmin ? <Shield size={15} strokeWidth={2.5} /> : <FolderLock size={15} strokeWidth={2.5} />}
-                <span>{isAdmin ? 'Admin Hub' : 'Management Hub'}</span>
+                {isAdmin ? <Shield size={15} strokeWidth={2.5} /> : <CheckSquare size={15} strokeWidth={2.5} />}
+                <span>{isAdmin ? 'Admin Hub' : 'Task Manager'}</span>
               </Link>
             )}
 
@@ -466,7 +465,7 @@ export default function Layout({ children }: LayoutProps) {
                     </button>
 
                     <Link
-                      to="/admin"
+                      to={isAdmin ? '/admin' : '/admin/tasks'}
                       onClick={() => setUserMenuOpen(false)}
                       style={{
                         display: 'flex',
@@ -480,8 +479,8 @@ export default function Layout({ children }: LayoutProps) {
                         transition: 'background 0.15s ease',
                       }}
                     >
-                      {isAdmin ? <Shield size={15} /> : <FolderLock size={15} />}
-                      <span>{isAdmin ? 'Admin Dashboard' : 'Management Workspace'}</span>
+                      {isAdmin ? <Shield size={15} /> : <CheckSquare size={15} />}
+                      <span>{isAdmin ? 'Admin Dashboard' : 'Task Manager'}</span>
                     </Link>
 
                     {isAdmin && (

@@ -13,7 +13,6 @@ export default function Login() {
 
   // Get redirect url from query params if available
   const queryParams = new URLSearchParams(location.search);
-  const redirectPath = queryParams.get('redirect') || '/admin';
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -33,7 +32,8 @@ export default function Login() {
     try {
       const res = await login({ email, password });
       showToast(`Welcome back, ${res.fullName}! Logged in as ${res.roleName}.`, 'success');
-      navigate(redirectPath, { replace: true });
+      const target = queryParams.get('redirect') || (res.role === 1 ? '/admin' : '/admin/tasks');
+      navigate(target, { replace: true });
     } catch (err: any) {
       const msg = err.response?.data?.message || 'Login failed. Please verify your credentials.';
       setErrorMessage(msg);
@@ -51,7 +51,8 @@ export default function Login() {
     try {
       const res = await login({ email: demoEmail, password: demoPass });
       showToast(`Welcome back, ${res.fullName}! Logged in as ${res.roleName}.`, 'success');
-      navigate(redirectPath, { replace: true });
+      const target = queryParams.get('redirect') || (res.role === 1 ? '/admin' : '/admin/tasks');
+      navigate(target, { replace: true });
     } catch (err: any) {
       const msg = err.response?.data?.message || 'Login failed. Please verify your credentials.';
       setErrorMessage(msg);

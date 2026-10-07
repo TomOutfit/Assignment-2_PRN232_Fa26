@@ -190,10 +190,17 @@ export default function ProjectList() {
       {/* ==================== BREADCRUMBS & MODE INDICATOR ==================== */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px', flexWrap: 'wrap', gap: '8px' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '13px', color: 'var(--text-secondary)' }}>
-          <Link to="/admin" style={{ color: 'var(--accent-primary)', textDecoration: 'none', fontWeight: 600 }}>
-            {isAdmin ? 'Admin Hub' : 'Management Hub'}
-          </Link>
-          <ChevronRight size={14} />
+          {isAdmin ? (
+            <>
+              <Link to="/admin" style={{ color: 'var(--accent-primary)', textDecoration: 'none', fontWeight: 600 }}>Admin Hub</Link>
+              <ChevronRight size={14} />
+            </>
+          ) : (
+            <>
+              <span style={{ fontWeight: 600, color: 'var(--text-secondary)' }}>Management</span>
+              <ChevronRight size={14} />
+            </>
+          )}
           <span style={{ fontWeight: 600, color: 'var(--text-primary)' }}>Project Management</span>
         </div>
 

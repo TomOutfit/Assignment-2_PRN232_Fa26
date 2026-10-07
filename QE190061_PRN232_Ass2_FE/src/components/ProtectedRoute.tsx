@@ -1,5 +1,5 @@
 import React from 'react';
-import { Navigate, useLocation } from 'react-router-dom';
+import { Navigate, useLocation, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { ShieldAlert } from 'lucide-react';
 
@@ -46,11 +46,11 @@ export const AdminRoute: React.FC<{ children: React.ReactNode }> = ({ children }
         </div>
         <h2 style={{ fontSize: 24, fontWeight: 700, marginBottom: 12 }}>403 - Access Denied</h2>
         <p style={{ color: 'var(--text-secondary, #6B7280)', marginBottom: 24, lineHeight: 1.6 }}>
-          You do not have Administrator permissions to access the Account Management section. This resource is restricted to Admin role accounts only.
+          You do not have Administrator permissions to access this area. This portal is restricted to Admin role accounts only.
         </p>
-        <a href="/admin" className="btn btn-primary" style={{ display: 'inline-flex', padding: '10px 20px', borderRadius: 8, textDecoration: 'none' }}>
-          Back to Management Hub
-        </a>
+        <Link to="/admin/tasks" className="btn btn-primary" style={{ display: 'inline-flex', padding: '10px 20px', borderRadius: 8, textDecoration: 'none' }}>
+          Back to Task Manager
+        </Link>
       </div>
     );
   }
