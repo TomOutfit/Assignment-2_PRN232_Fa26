@@ -65,9 +65,12 @@ export default function AdminDashboard() {
       {/* Hero Welcome Banner */}
       <div className="admin-hero">
         <div className="admin-hero-content">
-          <h1>Management Workspace</h1>
+          <h1>{isAdmin ? 'Admin Control Hub' : 'Staff Management Hub'}</h1>
           <p>
-            Welcome, <strong>{user?.fullName}</strong>. Manage your enterprise departments, projects, tasks, and team permissions with protected write access.
+            Welcome, <strong>{user?.fullName}</strong>.{' '}
+            {isAdmin
+              ? 'Manage your enterprise departments, projects, tasks, and system accounts with full administrative control.'
+              : 'Manage your enterprise departments, projects, tasks, and tags with protected staff write access.'}
           </p>
         </div>
 
@@ -227,7 +230,7 @@ export default function AdminDashboard() {
             </div>
           </Link>
 
-          {isAdmin ? (
+          {isAdmin && (
             <Link to="/admin/accounts" className="admin-portal-card" style={{ borderColor: 'rgba(239, 68, 68, 0.4)' }}>
               <div className="admin-portal-header">
                 <div className="admin-portal-icon" style={{ background: 'linear-gradient(135deg, #ef4444, #b91c1c)' }}>
@@ -247,26 +250,6 @@ export default function AdminDashboard() {
                 Manage Accounts <ChevronRight size={14} />
               </div>
             </Link>
-          ) : (
-            <div className="admin-portal-card" style={{ opacity: 0.6, cursor: 'not-allowed' }}>
-              <div className="admin-portal-header">
-                <div className="admin-portal-icon" style={{ background: '#9ca3af' }}>
-                  <Users size={20} />
-                </div>
-                <div>
-                  <div className="admin-portal-title">User Accounts</div>
-                  <span style={{ fontSize: 10, fontWeight: 700, color: '#6b7280', textTransform: 'uppercase' }}>
-                    Admin Only
-                  </span>
-                </div>
-              </div>
-              <div className="admin-portal-desc">
-                Staff accounts cannot modify user roles or credentials. Contact an Administrator for account elevation.
-              </div>
-              <div className="admin-portal-action" style={{ color: '#9ca3af' }}>
-                Restricted to Admins
-              </div>
-            </div>
           )}
         </div>
       </div>

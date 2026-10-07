@@ -49,7 +49,7 @@ export const AdminRoute: React.FC<{ children: React.ReactNode }> = ({ children }
           You do not have Administrator permissions to access the Account Management section. This resource is restricted to Admin role accounts only.
         </p>
         <a href="/admin" className="btn btn-primary" style={{ display: 'inline-flex', padding: '10px 20px', borderRadius: 8, textDecoration: 'none' }}>
-          Back to Admin Dashboard
+          Back to Management Hub
         </a>
       </div>
     );

@@ -20,11 +20,13 @@ import { ConfirmModal } from '../components/ui/ConfirmModal';
 import { EmptyState } from '../components/ui/EmptyState';
 import { Skeleton } from '../components/ui/Skeleton';
 import { useToast } from '../context/ToastContext';
+import { useAuth } from '../context/AuthContext';
 import './DepartmentList.css';
 import './DetailPages.css';
 
 export default function DepartmentList() {
   const toast = useToast();
+  const { isAdmin } = useAuth();
   const [departments, setDepartments] = useState<Department[]>([]);
   const [loading, setLoading] = useState(true);
   const [viewMode, setViewMode] = useState<'table' | 'grid'>('table');
@@ -131,7 +133,7 @@ export default function DepartmentList() {
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px', flexWrap: 'wrap', gap: '8px' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '13px', color: 'var(--text-secondary)' }}>
           <Link to="/admin" style={{ color: 'var(--accent-primary)', textDecoration: 'none', fontWeight: 600 }}>
-            Admin Hub
+            {isAdmin ? 'Admin Hub' : 'Management Hub'}
           </Link>
           <ChevronRight size={14} />
           <span style={{ fontWeight: 600, color: 'var(--text-primary)' }}>Department Management</span>

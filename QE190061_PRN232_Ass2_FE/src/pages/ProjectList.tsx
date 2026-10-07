@@ -22,6 +22,7 @@ import { ConfirmModal } from '../components/ui/ConfirmModal';
 import { EmptyState } from '../components/ui/EmptyState';
 import { Skeleton } from '../components/ui/Skeleton';
 import { useToast } from '../context/ToastContext';
+import { useAuth } from '../context/AuthContext';
 import './ProjectList.css';
 import './DetailPages.css';
 
@@ -35,6 +36,7 @@ const PROJECT_STATUS_OPTIONS = [
 
 export default function ProjectList() {
   const toast = useToast();
+  const { isAdmin } = useAuth();
   const [projects, setProjects] = useState<Project[]>([]);
   const [departments, setDepartments] = useState<Department[]>([]);
   const [loading, setLoading] = useState(true);
@@ -189,7 +191,7 @@ export default function ProjectList() {
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px', flexWrap: 'wrap', gap: '8px' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '13px', color: 'var(--text-secondary)' }}>
           <Link to="/admin" style={{ color: 'var(--accent-primary)', textDecoration: 'none', fontWeight: 600 }}>
-            Admin Hub
+            {isAdmin ? 'Admin Hub' : 'Management Hub'}
           </Link>
           <ChevronRight size={14} />
           <span style={{ fontWeight: 600, color: 'var(--text-primary)' }}>Project Management</span>

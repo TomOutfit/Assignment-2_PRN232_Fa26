@@ -75,12 +75,12 @@ export default function Layout({ children }: LayoutProps) {
 
   // Protected Management Navigation items
   const managementNavItems = [
-    { path: '/admin', label: 'Admin Hub', icon: Shield, exact: true, adminOnly: false },
+    { path: '/admin', label: isAdmin ? 'Admin Hub' : 'Management Hub', icon: isAdmin ? Shield : CheckSquare, exact: true, adminOnly: false },
     { path: '/admin/departments', label: 'Manage Departments', icon: Users, exact: false, adminOnly: false },
     { path: '/admin/projects', label: 'Manage Projects', icon: FolderKanban, exact: false, adminOnly: false },
     { path: '/admin/tasks', label: 'Manage Tasks', icon: CheckSquare, exact: false, adminOnly: false },
     { path: '/admin/tags', label: 'Manage Tags', icon: Tag, exact: false, adminOnly: false },
-    { path: '/admin/accounts', label: 'User Accounts', icon: ShieldCheck, exact: false, adminOnly: true },
+    ...(isAdmin ? [{ path: '/admin/accounts', label: 'User Accounts', icon: ShieldCheck, exact: false, adminOnly: true }] : []),
   ];
 
   return (
@@ -355,11 +355,19 @@ export default function Layout({ children }: LayoutProps) {
               <span className="search-kbd-badge">⌘K</span>
             </div>
 
-            {/* Quick Action: Admin Portal */}
+            {/* Quick Action: Management Hub / Admin Portal */}
             {isAuthenticated && (
-              <Link to="/admin" className="btn-new-project" style={{ background: 'linear-gradient(135deg, #2563EB, #1D4ED8)' }}>
-                <FolderLock size={15} strokeWidth={2.5} />
-                <span>Admin Hub</span>
+              <Link
+                to="/admin"
+                className="btn-new-project"
+                style={{
+                  background: isAdmin
+                    ? 'linear-gradient(135deg, #ef4444, #dc2626)'
+                    : 'linear-gradient(135deg, #2563eb, #1d4ed8)',
+                }}
+              >
+                {isAdmin ? <Shield size={15} strokeWidth={2.5} /> : <FolderLock size={15} strokeWidth={2.5} />}
+                <span>{isAdmin ? 'Admin Hub' : 'Management Hub'}</span>
               </Link>
             )}
 
@@ -472,7 +480,8 @@ export default function Layout({ children }: LayoutProps) {
                         transition: 'background 0.15s ease',
                       }}
                     >
-                      <Shield size={15} /> Admin Dashboard
+                      {isAdmin ? <Shield size={15} /> : <FolderLock size={15} />}
+                      <span>{isAdmin ? 'Admin Dashboard' : 'Management Workspace'}</span>
                     </Link>
 
                     {isAdmin && (
