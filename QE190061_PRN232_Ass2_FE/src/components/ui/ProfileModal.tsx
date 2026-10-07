@@ -28,6 +28,14 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ isOpen, onClose }) =
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [activeTab, setActiveTab] = useState<'profile' | 'security'>('profile');
 
+  React.useEffect(() => {
+    if (isOpen && user) {
+      setFullName(user.fullName || '');
+      setNewPassword('');
+      setConfirmPassword('');
+    }
+  }, [isOpen, user]);
+
   if (!isOpen || !user) return null;
 
   const handleSubmit = async (e: React.FormEvent) => {
