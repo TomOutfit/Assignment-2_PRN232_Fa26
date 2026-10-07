@@ -111,6 +111,10 @@ export const authApi = {
     const res = await api.get<Account>('/auth/me');
     return res.data;
   },
+  updateProfile: async (dto: { fullName: string; newPassword?: string }): Promise<Account> => {
+    const res = await api.put<Account>('/auth/profile', dto);
+    return res.data;
+  },
 };
 
 // ==================== ACCOUNTS API (ADMIN ONLY) ====================

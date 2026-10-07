@@ -24,10 +24,12 @@ import {
   FolderLock,
   Lock,
   Eye,
+  User,
 } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 import { useAuth } from '../context/AuthContext';
 import { CommandPalette } from './ui/CommandPalette';
+import { ProfileModal } from './ui/ProfileModal';
 import './Layout.css';
 
 interface LayoutProps {
@@ -39,6 +41,7 @@ export default function Layout({ children }: LayoutProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [cmdOpen, setCmdOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
+  const [profileOpen, setProfileOpen] = useState(false);
   const { theme, toggleTheme } = useTheme();
   const { user, isAuthenticated, isAdmin, logout } = useAuth();
   const navigate = useNavigate();
@@ -429,6 +432,31 @@ export default function Layout({ children }: LayoutProps) {
                       </div>
                     </div>
 
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setUserMenuOpen(false);
+                        setProfileOpen(true);
+                      }}
+                      style={{
+                        width: '100%',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: 8,
+                        padding: '8px 12px',
+                        borderRadius: 8,
+                        fontSize: 13,
+                        color: 'var(--text-primary)',
+                        background: 'none',
+                        border: 'none',
+                        cursor: 'pointer',
+                        textAlign: 'left',
+                        transition: 'background 0.15s ease',
+                      }}
+                    >
+                      <User size={15} /> My Profile
+                    </button>
+
                     <Link
                       to="/admin"
                       onClick={() => setUserMenuOpen(false)}
@@ -532,8 +560,9 @@ export default function Layout({ children }: LayoutProps) {
         </main>
       </div>
 
-      {/* Global Command Palette */}
+      {/* Global Command Palette & Profile Modal */}
       <CommandPalette isOpen={cmdOpen} onClose={() => setCmdOpen(false)} />
+      <ProfileModal isOpen={profileOpen} onClose={() => setProfileOpen(false)} />
     </div>
   );
 }
