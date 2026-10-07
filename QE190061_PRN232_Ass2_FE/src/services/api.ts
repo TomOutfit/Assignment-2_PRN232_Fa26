@@ -17,6 +17,7 @@ import type {
   AuthResponse,
   Account,
   UpdateAccountDto,
+  RefreshTokenDto,
 } from '../types';
 
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
@@ -37,18 +38,90 @@ api.interceptors.request.use((config) => {
 });
 
 // ==================== AUTH RESPONSE INTERCEPTOR ====================
+let isRefreshing = false;
+let failedQueue: Array<{ resolve: (token: string) => void; reject: (err: unknown) => void }> = [];
+
+const processQueue = (error: unknown, token: string | null = null) => {
+  failedQueue.forEach((prom) => {
+    if (error) {
+      prom.reject(error);
+    } else if (token) {
+      prom.resolve(token);
+    }
+  });
+  failedQueue = [];
+};
+
 api.interceptors.response.use(
   (response) => response,
-  (error) => {
-    if (error.response && error.response.status === 401) {
-      const isLoginRequest = error.config?.url?.includes('/auth/login');
-      if (!isLoginRequest) {
-        // Token expired or invalid: clear session and redirect to login
-        localStorage.removeItem('token');
-        localStorage.removeItem('user');
-        const currentPath = window.location.pathname;
-        if (!currentPath.includes('/login')) {
-          window.location.href = `/login?redirect=${encodeURIComponent(currentPath)}`;
+  async (error) => {
+    const originalRequest = error.config;
+    if (error.response && error.response.status === 401 && !originalRequest._retry) {
+      const isAuthUrl =
+        originalRequest.url?.includes('/auth/login') ||
+        originalRequest.url?.includes('/auth/refresh') ||
+        originalRequest.url?.includes('/auth/register');
+
+      if (!isAuthUrl) {
+        const storedToken = localStorage.getItem('token');
+        const storedRefreshToken = localStorage.getItem('refreshToken');
+
+        if (storedToken && storedRefreshToken) {
+          if (isRefreshing) {
+            return new Promise((resolve, reject) => {
+              failedQueue.push({ resolve, reject });
+            })
+              .then((newToken) => {
+                originalRequest.headers.Authorization = `Bearer ${newToken}`;
+                return api(originalRequest);
+              })
+              .catch((err) => Promise.reject(err));
+          }
+
+          originalRequest._retry = true;
+          isRefreshing = true;
+
+          try {
+            const res = await axios.post<AuthResponse>(`${API_BASE}/auth/refresh`, {
+              token: storedToken,
+              refreshToken: storedRefreshToken,
+            });
+
+            const newToken = res.data.token;
+            const newRefreshToken = res.data.refreshToken;
+
+            localStorage.setItem('token', newToken);
+            if (newRefreshToken) {
+              localStorage.setItem('refreshToken', newRefreshToken);
+            }
+
+            api.defaults.headers.common.Authorization = `Bearer ${newToken}`;
+            processQueue(null, newToken);
+
+            originalRequest.headers.Authorization = `Bearer ${newToken}`;
+            return api(originalRequest);
+          } catch (refreshErr) {
+            processQueue(refreshErr, null);
+            localStorage.removeItem('token');
+            localStorage.removeItem('refreshToken');
+            localStorage.removeItem('user');
+            const currentPath = window.location.pathname;
+            if (!currentPath.includes('/login')) {
+              window.location.href = `/login?redirect=${encodeURIComponent(currentPath)}`;
+            }
+            return Promise.reject(refreshErr);
+          } finally {
+            isRefreshing = false;
+          }
+        } else {
+          // Token expired or invalid and no refresh token available: clear session and redirect to login
+          localStorage.removeItem('token');
+          localStorage.removeItem('refreshToken');
+          localStorage.removeItem('user');
+          const currentPath = window.location.pathname;
+          if (!currentPath.includes('/login')) {
+            window.location.href = `/login?redirect=${encodeURIComponent(currentPath)}`;
+          }
         }
       }
     }
@@ -105,6 +178,10 @@ export const authApi = {
   },
   register: async (dto: RegisterDto): Promise<AuthResponse> => {
     const res = await api.post<AuthResponse>('/auth/register', dto);
+    return res.data;
+  },
+  refreshToken: async (dto: RefreshTokenDto): Promise<AuthResponse> => {
+    const res = await api.post<AuthResponse>('/auth/refresh', dto);
     return res.data;
   },
   getProfile: async (): Promise<Account> => {

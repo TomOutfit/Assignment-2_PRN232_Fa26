@@ -58,6 +58,24 @@ public class AuthController : ControllerBase
     }
 
     /// <summary>
+    /// Refresh access token using a valid refresh token (Bonus Feature)
+    /// </summary>
+    [HttpPost("refresh")]
+    public async Task<ActionResult<AuthResponseDto>> RefreshToken([FromBody] RefreshTokenRequestDto dto)
+    {
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
+
+        var (success, errorMessage, response) = await _authService.RefreshTokenAsync(dto);
+        if (!success)
+        {
+            return Unauthorized(new { message = errorMessage ?? "Invalid or expired refresh token." });
+        }
+
+        return Ok(response);
+    }
+
+    /// <summary>
     /// Get current logged-in user profile (Requires valid token)
     /// </summary>
     [HttpGet("me")]

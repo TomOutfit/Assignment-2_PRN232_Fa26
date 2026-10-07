@@ -120,12 +120,18 @@ export interface User {
 
 export interface AuthResponse {
   token: string;
+  refreshToken?: string;
   accountId: number;
   fullName: string;
   email: string;
   role: number;
   roleName: 'Admin' | 'Staff';
   expiration: string;
+}
+
+export interface RefreshTokenDto {
+  token: string;
+  refreshToken: string;
 }
 
 export interface LoginDto {

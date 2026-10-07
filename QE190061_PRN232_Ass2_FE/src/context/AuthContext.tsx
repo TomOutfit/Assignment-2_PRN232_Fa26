@@ -32,6 +32,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         setUser(parsedUser);
       } catch {
         localStorage.removeItem('token');
+        localStorage.removeItem('refreshToken');
         localStorage.removeItem('user');
       }
     }
@@ -49,6 +50,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     };
 
     localStorage.setItem('token', res.token);
+    if (res.refreshToken) {
+      localStorage.setItem('refreshToken', res.refreshToken);
+    }
     localStorage.setItem('user', JSON.stringify(loggedUser));
     setToken(res.token);
     setUser(loggedUser);
@@ -62,6 +66,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const logout = () => {
     localStorage.removeItem('token');
+    localStorage.removeItem('refreshToken');
     localStorage.removeItem('user');
     setToken(null);
     setUser(null);
