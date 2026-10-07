@@ -42,3 +42,10 @@ Thumbs.db
 # Agents & AI configs
 .agents/
 
+# Playwright & test output
+playwright-tests/
+playwright-report/
+test-results/
+QE190061_PRN232_Ass2_FE/playwright-tests/
+
+

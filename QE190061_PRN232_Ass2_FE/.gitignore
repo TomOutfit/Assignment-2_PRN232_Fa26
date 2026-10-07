@@ -5,3 +5,9 @@
 
 # Keep example
 !.env.example
+
+# Playwright & test output
+playwright-tests/
+playwright-report/
+test-results/
+
